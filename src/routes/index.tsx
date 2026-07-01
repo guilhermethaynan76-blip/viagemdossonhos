@@ -130,7 +130,7 @@ function HomePage() {
 
       <main id="top">
         <HeroSection openLead={openLead} />
-        <TrustLogos />
+        
         <ServicesSection />
         <WhyUsSection />
         <ManagementSection openLead={openLead} />
