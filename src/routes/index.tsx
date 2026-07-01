@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import {
-  Shield, CheckCircle2, Briefcase, Globe2, Plane, Ship, Building2, Car,
+  Shield, CheckCircle2, Briefcase, Globe2, Ship, Building2, Car,
   ShieldCheck, CreditCard, Ticket, Package, PartyPopper, ArrowRight, ChevronDown,
   Instagram, Phone, MapPin, Quote, Star, Plus, Minus,
 } from "lucide-react";
@@ -137,10 +137,6 @@ function Hero({ onCta }: { onCta: () => void }) {
             }}
           />
         ))}
-      </div>
-      {/* Plane */}
-      <div className="pointer-events-none absolute left-0 top-1/3 hidden md:block" style={{ animation: "fly-across 22s linear infinite" }}>
-        <Plane size={38} className="text-gold/70" style={{ transform: "rotate(-12deg)" }} />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32 pb-24">
