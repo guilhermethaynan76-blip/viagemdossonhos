@@ -77,7 +77,7 @@ function HomePage() {
       >
         <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 md:px-8">
           <a href="#top" className="flex items-center gap-3">
-            <img src="" alt="" className="h-12 w-auto object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+            <Plane className="h-6 w-6 -rotate-45 text-[#0E86D4]" strokeWidth={2} />
             <span className="font-display text-lg font-bold text-[#0A2540]">
               Viagens dos Sonhos
             </span>
@@ -994,8 +994,10 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           <div>
-            <img src="" alt="" className="h-14 w-auto object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
-            <p className="font-display text-xl font-bold text-white">Viagens dos Sonhos</p>
+            <div className="flex items-center gap-3">
+              <Plane className="h-7 w-7 -rotate-45 text-[#0E86D4]" strokeWidth={2} />
+              <p className="font-display text-xl font-bold text-white">Viagens dos Sonhos</p>
+            </div>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#94A3B8]">
               Excelência em gestão de viagens corporativas, conectando sua empresa ao mundo com segurança e economia.
             </p>
