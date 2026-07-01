@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import {
-  Shield, CheckCircle2, Briefcase, Globe2, Plane, Ship, Building2, Car,
+  Shield, CheckCircle2, Briefcase, Globe2, Ship, Building2, Car,
   ShieldCheck, CreditCard, Ticket, Package, PartyPopper, ArrowRight, ChevronDown,
   Instagram, Phone, MapPin, Quote, Star, Plus, Minus,
 } from "lucide-react";
