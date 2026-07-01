@@ -113,7 +113,7 @@ function HomePage() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="absolute left-0 right-0 top-[72px] border-b border-[#0E86D4]/15 bg-white lg:hidden"
+              className="absolute left-0 right-0 top-[88px] border-b border-[#0E86D4]/15 bg-white lg:hidden"
             >
               <div className="flex flex-col gap-1 p-4">
                 {[["Serviços","#servicos"],["Diferenciais","#diferenciais"],["Gestão","#gestao"],["Contato","#contato"]].map(([label, href]) => (
@@ -176,7 +176,7 @@ function HeroSection({ openLead }: { openLead: (url?: string, title?: string) =>
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden pt-[72px]"
+      className="relative overflow-hidden pt-[88px]"
       style={{ background: "linear-gradient(180deg, #FAFCFF 0%, #E6F3FC 100%)" }}
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 py-16 md:px-8 lg:grid-cols-[55%_45%] lg:gap-8 lg:py-24">
