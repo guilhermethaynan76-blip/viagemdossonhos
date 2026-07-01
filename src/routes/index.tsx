@@ -60,6 +60,7 @@ function Navbar({ onCta }: { onCta: () => void }) {
     >
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between gap-3 px-4 md:h-[76px] md:px-6">
         <a href="#top" className="flex min-w-0 items-center gap-2 md:gap-3">
+          <Plane className="h-5 w-5 shrink-0 -rotate-45 text-gold md:h-6 md:w-6" strokeWidth={2} fill="none" />
           <span className="font-display truncate text-base font-bold text-gold sm:text-xl md:text-2xl">
             Viagem dos Sonhos
           </span>
