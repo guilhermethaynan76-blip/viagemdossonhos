@@ -138,10 +138,6 @@ function Hero({ onCta }: { onCta: () => void }) {
           />
         ))}
       </div>
-      {/* Plane */}
-      <div className="pointer-events-none absolute left-0 top-1/3 hidden md:block" style={{ animation: "fly-across 22s linear infinite" }}>
-        <Plane size={38} className="text-gold/70" style={{ transform: "rotate(-12deg)" }} />
-      </div>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32 pb-24">
         <motion.div
