@@ -1003,6 +1003,7 @@ function Footer() {
                 alt="Viagens dos Sonhos"
                 className="h-12 w-auto"
               />
+              <span className="font-display text-lg font-bold text-white">Viagens dos Sonhos</span>
             </div>
 
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#94A3B8]">
