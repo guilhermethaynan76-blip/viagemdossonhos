@@ -34,52 +34,52 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Brand tokens - Viagem dos Sonhos */
-  --color-navy: var(--navy);
-  --color-navy-deep: var(--navy-deep);
-  --color-royal: var(--royal);
-  --color-gold: var(--gold);
-  --color-sun: var(--sun);
+  /* Brand tokens - Viagens dos Sonhos (Corporate) */
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-dark: var(--brand-blue-dark);
+  --color-brand-blue-deep: var(--brand-blue-deep);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-orange-soft: var(--brand-orange-soft);
   --color-offwhite: var(--offwhite);
-  --color-sand: var(--sand);
-  --color-mist: var(--mist);
+  --color-lightgray: var(--lightgray);
+  --color-corpgray: var(--corpgray);
 
-  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-label: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(0.985 0.005 85);
-  --foreground: oklch(0.2 0.05 260);
+  --radius: 0.5rem;
+  --background: oklch(0.99 0.005 240);
+  --foreground: oklch(0.2 0.05 250);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0.05 260);
+  --card-foreground: oklch(0.2 0.05 250);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0.05 260);
-  --primary: oklch(0.24 0.09 265);
-  --primary-foreground: oklch(0.985 0.01 85);
-  --secondary: oklch(0.968 0.007 247);
-  --secondary-foreground: oklch(0.24 0.09 265);
-  --muted: oklch(0.94 0.02 80);
-  --muted-foreground: oklch(0.55 0.03 260);
-  --accent: oklch(0.82 0.15 82);
-  --accent-foreground: oklch(0.2 0.05 260);
+  --popover-foreground: oklch(0.2 0.05 250);
+  --primary: oklch(0.6 0.16 240);
+  --primary-foreground: oklch(0.99 0.005 240);
+  --secondary: oklch(0.96 0.01 240);
+  --secondary-foreground: oklch(0.2 0.05 250);
+  --muted: oklch(0.96 0.01 240);
+  --muted-foreground: oklch(0.55 0.03 250);
+  --accent: oklch(0.7 0.19 45);
+  --accent-foreground: oklch(0.99 0.005 240);
   --destructive: oklch(0.577 0.245 27);
   --destructive-foreground: oklch(0.985 0.003 247);
-  --border: oklch(0.92 0.01 80);
-  --input: oklch(0.92 0.01 80);
-  --ring: oklch(0.82 0.15 82);
+  --border: oklch(0.92 0.01 240);
+  --input: oklch(0.92 0.01 240);
+  --ring: oklch(0.6 0.16 240);
 
-  /* Brand colors mapped from hex spec */
-  --navy-deep: #0A1E3F;
-  --navy: #0A1E3F;
-  --royal: #1A3A6B;
-  --gold: #F5B841;
-  --sun: #FDD835;
-  --offwhite: #FAF8F3;
-  --sand: #F4EEE2;
-  --mist: #8A94A6;
+  /* Brand palette */
+  --brand-blue: #0E86D4;
+  --brand-blue-dark: #0A2540;
+  --brand-blue-deep: #061838;
+  --brand-orange: #F26722;
+  --brand-orange-soft: #F58B4E;
+  --offwhite: #FAFCFF;
+  --lightgray: #F1F5F9;
+  --corpgray: #64748B;
 }
 
 @layer base {
@@ -87,13 +87,14 @@
     border-color: var(--color-border);
   }
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--offwhite);
+    color: var(--brand-blue-dark);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
+    letter-spacing: -0.02em;
   }
 }
 
@@ -106,14 +107,12 @@
   text-transform: uppercase;
 }
 
-@keyframes fly-across {
-  0% { transform: translate(-20vw, 20vh) rotate(8deg); opacity: 0; }
-  10% { opacity: 0.8; }
-  90% { opacity: 0.8; }
-  100% { transform: translate(120vw, -10vh) rotate(8deg); opacity: 0; }
-}
 @keyframes pulse-ring {
   0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
   70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
   100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
