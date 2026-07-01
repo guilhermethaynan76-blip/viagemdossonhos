@@ -72,22 +72,24 @@ function HomePage() {
       {/* Navbar */}
       <nav
         className={`fixed left-0 right-0 top-0 z-50 h-[72px] transition-all ${
-          scrolled ? "border-b border-[#0E86D4]/15 bg-white/95 backdrop-blur-xl" : "bg-white/90 backdrop-blur-md border-b border-[#0E86D4]/10"
+          scrolled ? "border-b border-white/10 bg-[#0E86D4]/95 backdrop-blur-xl" : "bg-[#0E86D4] border-b border-white/10"
         }`}
       >
         <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 md:px-8">
           <a href="#top" className="flex items-center gap-3">
-            <Plane className="h-6 w-6 -rotate-45 text-[#0E86D4]" strokeWidth={2} />
-            <span className="font-display text-lg font-bold text-[#0A2540]">
-              Viagens dos Sonhos
-            </span>
+            <img
+              src="https://res.cloudinary.com/dkwpz87nw/image/upload/v1782936767/WhatsApp_Image_2026-07-01_at_17.08.32-removebg-preview_bjdwhz.png"
+              alt="Viagens dos Sonhos"
+              className="h-10 w-auto"
+            />
           </a>
           <div className="hidden items-center gap-8 lg:flex">
-            <a href="#servicos" className="text-sm font-medium text-[#0A2540] hover:text-[#0E86D4]">Serviços</a>
-            <a href="#diferenciais" className="text-sm font-medium text-[#0A2540] hover:text-[#0E86D4]">Diferenciais</a>
-            <a href="#gestao" className="text-sm font-medium text-[#0A2540] hover:text-[#0E86D4]">Gestão</a>
-            <a href="#contato" className="text-sm font-medium text-[#0A2540] hover:text-[#0E86D4]">Contato</a>
+            <a href="#servicos" className="text-sm font-medium text-white/90 hover:text-white">Serviços</a>
+            <a href="#diferenciais" className="text-sm font-medium text-white/90 hover:text-white">Diferenciais</a>
+            <a href="#gestao" className="text-sm font-medium text-white/90 hover:text-white">Gestão</a>
+            <a href="#contato" className="text-sm font-medium text-white/90 hover:text-white">Contato</a>
           </div>
+
           <div className="flex items-center gap-3">
             <button
               onClick={() => openLead()}
@@ -995,9 +997,13 @@ function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-3">
-              <Plane className="h-7 w-7 -rotate-45 text-[#0E86D4]" strokeWidth={2} />
-              <p className="font-display text-xl font-bold text-white">Viagens dos Sonhos</p>
+              <img
+                src="https://res.cloudinary.com/dkwpz87nw/image/upload/v1782936767/WhatsApp_Image_2026-07-01_at_17.08.32-removebg-preview_bjdwhz.png"
+                alt="Viagens dos Sonhos"
+                className="h-12 w-auto"
+              />
             </div>
+
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#94A3B8]">
               Excelência em gestão de viagens corporativas, conectando sua empresa ao mundo com segurança e economia.
             </p>
