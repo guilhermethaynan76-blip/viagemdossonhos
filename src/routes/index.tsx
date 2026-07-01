@@ -71,7 +71,7 @@ function HomePage() {
 
       {/* Navbar */}
       <nav
-        className={`fixed left-0 right-0 top-0 z-50 h-[72px] transition-all ${
+        className={`fixed left-0 right-0 top-0 z-50 h-[88px] transition-all ${
           scrolled ? "border-b border-white/10 bg-[#0A2540]/95 backdrop-blur-xl" : "bg-[#0A2540] border-b border-white/10"
         }`}
       >
