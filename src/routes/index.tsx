@@ -58,12 +58,14 @@ function Navbar({ onCta }: { onCta: () => void }) {
         borderBottom: scrolled ? "1px solid rgba(245,184,65,0.15)" : "1px solid transparent",
       }}
     >
-      <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-6">
-        <a href="#top" className="flex items-center gap-3">
-          <img src="" alt="Viagem dos Sonhos" style={{ height: 52, objectFit: "contain" }}
+      <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between gap-3 px-4 md:h-[76px] md:px-6">
+        <a href="#top" className="flex min-w-0 items-center gap-2 md:gap-3">
+          <img src="" alt="Viagem dos Sonhos" style={{ height: 44, objectFit: "contain" }}
             onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
           />
-          <span className="font-display text-2xl font-bold text-gold">Viagem dos Sonhos</span>
+          <span className="font-display truncate text-base font-bold text-gold sm:text-xl md:text-2xl">
+            Viagem dos Sonhos
+          </span>
         </a>
         <nav className="hidden items-center gap-8 md:flex">
           {[
@@ -79,9 +81,10 @@ function Navbar({ onCta }: { onCta: () => void }) {
         </nav>
         <button
           onClick={onCta}
-          className="rounded-full bg-gold px-5 py-2.5 font-label text-xs font-semibold text-navy-deep transition hover:brightness-110"
+          className="shrink-0 rounded-full bg-gold px-3 py-2 font-label text-[10px] font-semibold text-navy-deep transition hover:brightness-110 md:px-5 md:py-2.5 md:text-xs"
         >
-          Solicitar Cotação
+          <span className="md:hidden">Cotação</span>
+          <span className="hidden md:inline">Solicitar Cotação</span>
         </button>
       </div>
     </header>
