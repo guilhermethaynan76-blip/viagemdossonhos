@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring, useInView } from "framer-motion";
 import {
-  Shield, CheckCircle2, Briefcase, Globe2, Ship, Building2, Car,
-  ShieldCheck, CreditCard, Ticket, Package, PartyPopper, ArrowRight, ChevronDown,
-  Instagram, Phone, MapPin, Quote, Star, Plus, Minus, Plane,
+  Globe, Clock, Plane, Building2, Car, Shield,
+  Heart, Award, BarChart3, User, CheckCircle2,
+  ArrowRight, Menu, X, Instagram, TrendingUp, FileBarChart, Zap,
 } from "lucide-react";
 import { LeadCaptureModal } from "@/components/LeadCaptureModal";
 
@@ -12,390 +12,393 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const WA_BASE = "https://wa.me/5511991335192";
-const wa = (text: string) => `${WA_BASE}?text=${encodeURIComponent(text)}`;
+const WHATSAPP_BASE = "https://wa.me/5511932195053";
+const WA_DEFAULT = `${WHATSAPP_BASE}?text=Olá,+gostaria+de+uma+cotação+de+viagens+corporativas.`;
 
-const WhatsAppIcon = ({ size = 24, className = "" }: { size?: number; className?: string }) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" className={className} aria-hidden="true">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-  </svg>
-);
-
-/* ---------------- Reveal helper ---------------- */
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] as const } }),
-};
-
-/* ---------------- Scroll progress bar ---------------- */
-function ScrollProgress() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
+function WhatsAppIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
-    <motion.div
-      style={{ scaleX, transformOrigin: "0% 50%" }}
-      className="fixed inset-x-0 top-0 z-[100] h-[3px] bg-gold"
-    />
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
   );
 }
 
-/* ---------------- Navbar ---------------- */
-function Navbar({ onCta }: { onCta: () => void }) {
-  const [scrolled, setScrolled] = useState(false);
+function useCounter(target: number, duration = 1500, start = false) {
+  const [value, setValue] = useState(0);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
+    if (!start) return;
+    let raf: number;
+    const t0 = performance.now();
+    const tick = (t: number) => {
+      const p = Math.min((t - t0) / duration, 1);
+      setValue(Math.floor(p * target));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration, start]);
+  return value;
+}
+
+function HomePage() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalUrl, setModalUrl] = useState(WA_DEFAULT);
+  const [modalTitle, setModalTitle] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return (
-    <header
-      className="fixed inset-x-0 top-0 z-50 transition-all duration-500"
-      style={{
-        background: scrolled ? "rgba(10,30,63,0.85)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(245,184,65,0.15)" : "1px solid transparent",
-      }}
-    >
-      <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between gap-3 px-4 md:h-[76px] md:px-6">
-        <a href="#top" className="flex min-w-0 items-center gap-2 md:gap-3">
-          <Plane className="h-5 w-5 shrink-0 -rotate-45 text-gold md:h-6 md:w-6" strokeWidth={2} fill="none" />
-          <span className="font-display truncate text-base font-bold text-gold sm:text-xl md:text-2xl">
-            Viagem dos Sonhos
-          </span>
-        </a>
-        <nav className="hidden items-center gap-8 md:flex">
-          {[
-            ["Destinos", "#destinos"],
-            ["Serviços", "#servicos"],
-            ["Como Funciona", "#como-funciona"],
-            ["Contato", "#contato"],
-          ].map(([label, href]) => (
-            <a key={href} href={href} className="text-sm text-offwhite/85 transition hover:text-gold">
-              {label}
-            </a>
-          ))}
-        </nav>
-        <button
-          onClick={onCta}
-          className="shrink-0 rounded-full bg-gold px-3 py-2 font-label text-[10px] font-semibold text-navy-deep transition hover:brightness-110 md:px-5 md:py-2.5 md:text-xs"
-        >
-          <span className="md:hidden">Cotação</span>
-          <span className="hidden md:inline">Solicitar Cotação</span>
-        </button>
-      </div>
-    </header>
-  );
-}
-
-/* ---------------- Hero ---------------- */
-function Hero({ onCta }: { onCta: () => void }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 180]);
+  function openLead(url: string = WA_DEFAULT, title?: string) {
+    setModalUrl(url);
+    setModalTitle(title);
+    setModalOpen(true);
+  }
 
   return (
-    <section id="top" ref={ref} className="relative flex min-h-[100svh] items-center overflow-hidden">
+    <div className="min-h-screen bg-[#FAFCFF]">
+      {/* Scroll progress */}
       <motion.div
-        style={{ y }}
-        className="absolute inset-0 -top-20 -bottom-20 bg-navy-deep"
-      >
-        <img
-          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=80"
-          alt=""
-          aria-hidden
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <video
-          src="https://res.cloudinary.com/dkwpz87nw/video/upload/v1782926486/202607011336_xnjn4j.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-      </motion.div>
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(120deg, rgba(10,30,63,0.85) 0%, rgba(10,30,63,0.55) 60%, rgba(10,30,63,0.35) 100%)",
-        }}
+        style={{ scaleX }}
+        className="fixed left-0 right-0 top-0 z-[100] h-[3px] origin-left bg-[#F26722]"
       />
-      {/* Gold particles */}
-      <div className="pointer-events-none absolute inset-0">
-        {Array.from({ length: 22 }).map((_, i) => (
-          <span
-            key={i}
-            className="absolute rounded-full bg-gold"
-            style={{
-              width: `${2 + (i % 3)}px`, height: `${2 + (i % 3)}px`,
-              left: `${(i * 47) % 100}%`, top: `${(i * 83) % 100}%`,
-              opacity: 0.3,
-              animation: `pulse-ring 4s ${i * 0.3}s infinite`,
-            }}
-          />
-        ))}
-      </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32 pb-24">
-        <motion.div
-          initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.12 } } }}
-          className="max-w-3xl text-center md:text-left"
-        >
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-gold/50 bg-white/5 px-4 py-2 backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-            <span className="font-label text-[11px] text-offwhite">Agente Autorizado CVC</span>
-          </motion.div>
-          <motion.h1
-            variants={fadeUp}
-            className="font-display mt-6 text-offwhite"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", lineHeight: 1.05, letterSpacing: "-0.02em" }}
-          >
-            Sua próxima história começa <em className="text-gold">com uma viagem</em>
-          </motion.h1>
-          <motion.p variants={fadeUp} className="mx-auto mt-6 max-w-[540px] text-lg text-offwhite/85 md:mx-0">
-            Passagens, pacotes, cruzeiros e experiências inesquecíveis. Viaje com quem entende do assunto e realiza sonhos.
-          </motion.p>
-          <motion.div variants={fadeUp} className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center md:justify-start">
+      {/* Navbar */}
+      <nav
+        className={`fixed left-0 right-0 top-0 z-50 h-[72px] transition-all ${
+          scrolled ? "border-b border-[#0E86D4]/15 bg-white/95 backdrop-blur-xl" : "bg-white/90 backdrop-blur-md border-b border-[#0E86D4]/10"
+        }`}
+      >
+        <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 md:px-8">
+          <a href="#top" className="flex items-center gap-3">
+            <img src="" alt="" className="h-12 w-auto object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+            <span className="font-display text-lg font-bold text-[#0A2540]">
+              Viagens dos Sonhos
+            </span>
+          </a>
+          <div className="hidden items-center gap-8 lg:flex">
+            <a href="#servicos" className="text-sm font-medium text-[#0A2540] hover:text-[#0E86D4]">Serviços</a>
+            <a href="#diferenciais" className="text-sm font-medium text-[#0A2540] hover:text-[#0E86D4]">Diferenciais</a>
+            <a href="#gestao" className="text-sm font-medium text-[#0A2540] hover:text-[#0E86D4]">Gestão</a>
+            <a href="#contato" className="text-sm font-medium text-[#0A2540] hover:text-[#0E86D4]">Contato</a>
+          </div>
+          <div className="flex items-center gap-3">
             <button
-              onClick={onCta}
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 font-label text-sm font-semibold text-navy-deep transition hover:brightness-110"
+              onClick={() => openLead()}
+              className="hidden rounded-lg bg-[#F26722] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E] md:inline-flex"
             >
-              Solicitar Cotação <ArrowRight size={16} className="transition group-hover:translate-x-1" />
+              Solicitar Cotação
             </button>
-            <a
-              href="#destinos"
-              className="inline-flex items-center justify-center rounded-full border border-offwhite/70 px-8 py-4 font-label text-sm text-offwhite transition hover:bg-offwhite hover:text-navy-deep"
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="rounded-md p-2 text-[#0A2540] lg:hidden"
+              aria-label="Menu"
             >
-              Ver Destinos
-            </a>
-          </motion.div>
-        </motion.div>
-      </div>
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
+        </div>
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="absolute left-0 right-0 top-[72px] border-b border-[#0E86D4]/15 bg-white lg:hidden"
+            >
+              <div className="flex flex-col gap-1 p-4">
+                {[["Serviços","#servicos"],["Diferenciais","#diferenciais"],["Gestão","#gestao"],["Contato","#contato"]].map(([label, href]) => (
+                  <a key={href} href={href} onClick={() => setMobileOpen(false)} className="rounded-md px-3 py-3 text-sm font-medium text-[#0A2540] hover:bg-[#F1F5F9]">{label}</a>
+                ))}
+                <button
+                  onClick={() => { setMobileOpen(false); openLead(); }}
+                  className="mt-2 rounded-lg bg-[#F26722] px-5 py-3 text-sm font-semibold text-white"
+                >
+                  Solicitar Cotação
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
 
-      <motion.div
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-        className="absolute inset-x-0 bottom-8 flex flex-col items-center gap-2 text-offwhite/70"
+      <main id="top">
+        <HeroSection openLead={openLead} />
+        <TrustLogos />
+        <ServicesSection />
+        <WhyUsSection />
+        <ManagementSection openLead={openLead} />
+        <ProcessSection />
+        <QuizSection openLead={openLead} />
+        <TestimonialsSection openLead={openLead} />
+        <FinalCTA openLead={openLead} />
+        <FAQSection />
+        <Footer />
+      </main>
+
+      {/* Floating WhatsApp */}
+      <button
+        onClick={() => openLead()}
+        aria-label="WhatsApp"
+        className="fixed bottom-6 right-6 z-[90] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl"
+        style={{ animation: "pulse-ring 2s infinite" }}
       >
-        <span className="font-label text-[10px]">role para descobrir</span>
-        <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.8 }}>
-          <ChevronDown size={20} className="text-gold" />
+        <WhatsAppIcon className="h-7 w-7" />
+      </button>
+
+      <LeadCaptureModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        whatsappUrl={modalUrl}
+        title={modalTitle}
+      />
+    </div>
+  );
+}
+
+/* ---------------- HERO ---------------- */
+function HeroSection({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const c1 = useCounter(30, 1500, inView);
+  const c2 = useCounter(24, 1500, inView);
+  const c3 = useCounter(5, 1500, inView);
+
+  return (
+    <section
+      ref={ref}
+      className="relative overflow-hidden pt-[72px]"
+      style={{ background: "linear-gradient(180deg, #FAFCFF 0%, #E6F3FC 100%)" }}
+    >
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 py-16 md:px-8 lg:grid-cols-[55%_45%] lg:gap-8 lg:py-24">
+        {/* Left column */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col items-start gap-5"
+        >
+          <span className="rounded-full border border-[#0E86D4]/30 bg-[#0E86D4]/10 px-4 py-1.5 font-label text-[10px] font-semibold text-[#0E86D4]">
+            Gestão inteligente de viagens corporativas
+          </span>
+          <h1 className="max-w-[560px] font-display text-4xl font-bold leading-[1.1] text-[#0A2540] md:text-5xl lg:text-6xl">
+            Gestão inteligente para suas viagens corporativas
+          </h1>
+          <p className="max-w-[500px] text-[17px] leading-relaxed text-[#64748B]">
+            A tecnologia mais avançada para viagens a trabalho, garantindo economia, controle e agilidade na gestão da sua empresa.
+          </p>
+
+          <div className="mt-4 grid w-full grid-cols-3 gap-4 border-y border-[#0E86D4]/15 py-5 md:max-w-md">
+            {[
+              { n: `${c1}%`, l: "Redução média de custos" },
+              { n: `${c2}h`, l: "Atendimento contínuo" },
+              { n: `${c3}+`, l: "Anos de experiência" },
+            ].map((m) => (
+              <div key={m.l}>
+                <p className="font-display text-2xl font-bold text-[#0E86D4] md:text-3xl">{m.n}</p>
+                <p className="mt-1 text-[11px] leading-tight text-[#64748B]">{m.l}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-2 flex w-full flex-col gap-3 sm:flex-row">
+            <button
+              onClick={() => openLead()}
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#F26722] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E]"
+            >
+              Solicitar Cotação <ArrowRight className="h-4 w-4" />
+            </button>
+            <button
+              onClick={() => openLead(WA_DEFAULT, "Falar com Consultor")}
+              className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[#0E86D4] bg-transparent px-6 py-3.5 text-sm font-semibold text-[#0E86D4] transition hover:bg-[#0E86D4]/5"
+            >
+              Falar com Consultor
+            </button>
+          </div>
         </motion.div>
-      </motion.div>
+
+        {/* Right column: Dashboard mockup */}
+        <HeroDashboard />
+      </div>
     </section>
   );
 }
 
-/* ---------------- Trust bar ---------------- */
-function TrustBar() {
-  const items = [
-    { Icon: Shield, text: "Segurança em cada etapa da sua viagem" },
-    { Icon: CheckCircle2, text: "Confiança de quem é líder em turismo" },
-    { Icon: Briefcase, text: "Os melhores pacotes, passagens e hotéis" },
-    { Icon: Globe2, text: "Atendimento especializado para realizar seu sonho" },
-  ];
+function HeroDashboard() {
   return (
-    <section className="bg-navy-deep py-10" style={{ borderTop: "1px solid rgba(245,184,65,0.15)", borderBottom: "1px solid rgba(245,184,65,0.15)" }}>
-      <motion.div
-        initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
-        variants={{ show: { transition: { staggerChildren: 0.08 } } }}
-        className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 md:grid-cols-4"
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.7, delay: 0.2 }}
+      className="relative mx-auto w-full max-w-[520px]"
+    >
+      {/* Main dashboard card */}
+      <div
+        className="relative rounded-2xl bg-white p-6"
+        style={{
+          border: "1px solid rgba(14,134,212,0.15)",
+          boxShadow: "0 30px 60px -20px rgba(10,37,64,0.25), 0 10px 20px -10px rgba(14,134,212,0.15)",
+        }}
       >
-        {items.map(({ Icon, text }, i) => (
-          <motion.div key={i} variants={fadeUp} custom={i} className="flex items-start gap-4">
-            <div className="rounded-full border border-gold/40 bg-gold/10 p-3">
-              <Icon size={22} className="text-gold" />
+        <div className="mb-5 flex items-center justify-between">
+          <div>
+            <p className="font-label text-[9px] font-semibold text-[#64748B]">Dashboard</p>
+            <p className="mt-1 font-display text-base font-bold text-[#0A2540]">Visão geral</p>
+          </div>
+          <div className="flex gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#F1F5F9]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#F1F5F9]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#0E86D4]" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-3">
+          {[
+            { l: "Viagens", v: "47", i: <Plane className="h-3.5 w-3.5" /> },
+            { l: "Compliance", v: "98%", i: <Shield className="h-3.5 w-3.5" /> },
+            { l: "Saving", v: "R$ 12k", i: <TrendingUp className="h-3.5 w-3.5" /> },
+          ].map((k) => (
+            <div key={k.l} className="rounded-lg bg-[#F1F5F9] p-3">
+              <div className="flex items-center gap-1.5 text-[#0E86D4]">{k.i}<span className="font-label text-[8px] font-semibold text-[#64748B]">{k.l}</span></div>
+              <p className="mt-1 font-display text-lg font-bold text-[#0A2540]">{k.v}</p>
             </div>
-            <p className="text-sm leading-relaxed text-offwhite/90">{text}</p>
-          </motion.div>
-        ))}
+          ))}
+        </div>
+
+        {/* Chart */}
+        <div className="mt-5 rounded-lg border border-[#E2E8F0] p-4">
+          <div className="flex items-center justify-between">
+            <p className="font-label text-[9px] font-semibold text-[#64748B]">Gastos mensais</p>
+            <p className="text-[10px] font-medium text-[#F26722]">↓ 30%</p>
+          </div>
+          <svg viewBox="0 0 220 80" className="mt-2 h-20 w-full">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#0E86D4" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#0E86D4" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <path d="M0,60 L30,45 L60,55 L90,35 L120,40 L150,25 L180,30 L220,15 L220,80 L0,80 Z" fill="url(#chartGrad)" />
+            <path d="M0,60 L30,45 L60,55 L90,35 L120,40 L150,25 L180,30 L220,15" fill="none" stroke="#0E86D4" strokeWidth="2" />
+            {[[30,45],[60,55],[90,35],[120,40],[150,25],[180,30],[220,15]].map(([x,y],i) => (
+              <circle key={i} cx={x} cy={y} r="2.5" fill="#F26722" />
+            ))}
+          </svg>
+          <div className="mt-2 flex justify-between text-[9px] text-[#94A3B8]">
+            {["Jan","Fev","Mar","Abr","Mai","Jun","Jul"].map(m => <span key={m}>{m}</span>)}
+          </div>
+        </div>
+      </div>
+
+      {/* Floating card 1 */}
+      <motion.div
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -left-4 top-24 hidden rounded-xl bg-white p-4 md:block"
+        style={{
+          border: "1px solid rgba(14,134,212,0.15)",
+          boxShadow: "0 20px 40px -12px rgba(10,37,64,0.2)",
+        }}
+      >
+        <div className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#F26722]/10 text-[#F26722]">
+            <TrendingUp className="h-4 w-4" />
+          </div>
+          <div>
+            <p className="text-[9px] font-medium text-[#64748B]">Economia mensal</p>
+            <p className="font-display text-sm font-bold text-[#0A2540]">R$ 12.400</p>
+          </div>
+        </div>
       </motion.div>
-    </section>
+
+      {/* Floating card 2 */}
+      <motion.div
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute -right-4 bottom-16 hidden rounded-xl bg-white p-4 md:block"
+        style={{
+          border: "1px solid rgba(14,134,212,0.15)",
+          boxShadow: "0 20px 40px -12px rgba(10,37,64,0.2)",
+        }}
+      >
+        <div className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0E86D4]/10 text-[#0E86D4]">
+            <CheckCircle2 className="h-4 w-4" />
+          </div>
+          <div>
+            <p className="text-[9px] font-medium text-[#64748B]">Compliance</p>
+            <p className="font-display text-sm font-bold text-[#0A2540]">98%</p>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
-/* ---------------- Storytelling ---------------- */
-function Storytelling() {
+/* ---------------- TRUST LOGOS ---------------- */
+function TrustLogos() {
   return (
-    <section className="bg-offwhite py-28 md:py-36">
-      <div className="mx-auto max-w-4xl px-6 text-center">
-        <motion.p initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="font-label text-xs text-gold">
-          Nossa filosofia
-        </motion.p>
-        <motion.h2
-          initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={1}
-          className="font-display mt-4 text-navy-deep"
-          style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)", lineHeight: 1.1, letterSpacing: "-0.01em" }}
-        >
-          Não vendemos viagens. <em className="text-royal">Realizamos sonhos.</em>
-        </motion.h2>
-        <motion.p
-          initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} custom={2}
-          className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-navy/70"
-        >
-          Cada destino é uma nova história esperando para ser vivida. Cuidamos de cada detalhe, das passagens à hospedagem, para que você viva experiências que ficam para sempre.
-        </motion.p>
-      </div>
-      <div className="mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-6 px-6 md:grid-cols-2">
-        {[
-          "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1400&q=80",
-          "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?auto=format&fit=crop&w=1400&q=80",
-        ].map((src, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: i * 0.15 }}
-            className="aspect-[4/3] overflow-hidden rounded-2xl"
-          >
-            <img src={src} alt="" className="h-full w-full object-cover" />
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Services ---------------- */
-function Services() {
-  const items = [
-    { Icon: Ticket, t: "Passagens Aéreas", d: "Nacionais e internacionais com as melhores condições" },
-    { Icon: Package, t: "Pacotes de Viagens", d: "Roteiros completos para você só se preocupar em aproveitar" },
-    { Icon: Ship, t: "Cruzeiros", d: "As melhores experiências a bordo pelos mares do mundo" },
-    { Icon: Briefcase, t: "Viagens Corporativas", d: "Soluções completas para viagens empresariais" },
-    { Icon: Building2, t: "Hospedagem", d: "Os melhores hotéis para a sua estadia perfeita" },
-    { Icon: PartyPopper, t: "Excursões e Eventos", d: "Eventos esportivos e excursões inesquecíveis" },
-    { Icon: Car, t: "Locação de Veículos", d: "Liberdade para explorar o seu destino" },
-    { Icon: ShieldCheck, t: "Seguro Viagem", d: "Viaje com total tranquilidade e segurança" },
-    { Icon: CreditCard, t: "Parcelamento Facilitado", d: "Realize sua viagem com condições que cabem no bolso" },
-  ];
-  return (
-    <section id="servicos" className="bg-sand py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-14 text-center">
-          <p className="font-label text-xs text-gold">Serviços completos</p>
-          <h2 className="font-display mt-3 text-navy-deep" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.01em" }}>
-            O que oferecemos
-          </h2>
-        </motion.div>
-        <motion.div
-          initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }}
-          variants={{ show: { transition: { staggerChildren: 0.06 } } }}
-          className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {items.map(({ Icon, t, d }, i) => (
-            <motion.div
-              key={t} variants={fadeUp} custom={i}
-              whileHover={{ y: -6 }}
-              className="group rounded-2xl border border-navy/10 bg-white/70 p-7 backdrop-blur transition hover:shadow-2xl hover:shadow-navy/10"
-              style={{ boxShadow: "0 2px 20px -8px rgba(10,30,63,0.08)" }}
-            >
-              <div className="mb-5 inline-flex rounded-xl bg-gold/15 p-3 text-gold ring-1 ring-gold/30">
-                <Icon size={22} />
-              </div>
-              <h3 className="font-display text-xl text-navy-deep">{t}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-navy/60">{d}</p>
-            </motion.div>
+    <section className="border-y border-[#E2E8F0] bg-[#FAFCFF] py-10">
+      <div className="mx-auto max-w-7xl px-4 md:px-8">
+        <p className="text-center font-label text-[10px] font-semibold text-[#64748B]">
+          Empresas que confiam em nós
+        </p>
+        <div className="mt-6 grid grid-cols-3 items-center gap-6 opacity-50 md:grid-cols-6">
+          {[1,2,3,4,5,6].map((i) => (
+            <div key={i} className="flex h-10 items-center justify-center">
+              <div className="h-6 w-24 rounded bg-[#64748B]/40" style={{ filter: "grayscale(1)" }} />
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 }
 
-/* ---------------- Destinations ---------------- */
-function Destinations({ onPick }: { onPick: (dest: string) => void }) {
-  const items = [
-    { name: "Maldivas", img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1400&q=80" },
-    { name: "Paris", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1400&q=80" },
-    { name: "Cancún", img: "https://images.unsplash.com/photo-1552074284-5e88ef1aef18?auto=format&fit=crop&w=1400&q=80" },
-    { name: "Dubai", img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=80" },
-    { name: "Nordeste Brasileiro", img: "https://images.unsplash.com/photo-1596397249129-c7a8f8718873?auto=format&fit=crop&w=1400&q=80" },
-    { name: "Europa", img: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1400&q=80" },
+/* ---------------- SERVICES ---------------- */
+function ServicesSection() {
+  const services = [
+    { icon: Globe, title: "Sistema Online", desc: "Reservas com preços e disponibilidade em tempo real para maior agilidade." },
+    { icon: Clock, title: "Atendimento 24h", desc: "Suporte completo a qualquer hora, 365 dias por ano." },
+    { icon: Plane, title: "Aéreo Nacional e Internacional", desc: "Emissão de passagens para todos os destinos com as melhores tarifas." },
+    { icon: Building2, title: "Rede Hoteleira", desc: "Reservas em toda rede de hotéis nacionais e internacionais." },
+    { icon: Car, title: "Locação de Veículos", desc: "Parceria com as principais locadoras para sua mobilidade." },
+    { icon: Shield, title: "Seguro Viagem", desc: "Garanta a melhor cobertura pelo melhor preço para a segurança da sua equipe." },
   ];
-  return (
-    <section id="destinos" className="bg-navy-deep py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-14 text-center">
-          <p className="font-label text-xs text-gold">Para onde o mundo vai te levar?</p>
-          <h2 className="font-display mt-3 text-offwhite" style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)", letterSpacing: "-0.01em" }}>
-            Destinos que inspiram
-          </h2>
-        </motion.div>
-        <motion.div
-          initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }}
-          variants={{ show: { transition: { staggerChildren: 0.08 } } }}
-          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {items.map(({ name, img }, i) => (
-            <motion.div
-              key={name} variants={fadeUp} custom={i}
-              whileHover={{ y: -8 }}
-              className="group relative aspect-[4/5] overflow-hidden rounded-2xl"
-            >
-              <img
-                src={img} alt={name}
-                className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 transition"
-                style={{ background: "linear-gradient(180deg, transparent 40%, rgba(10,30,63,0.85) 100%)" }} />
-              <div className="absolute inset-x-0 bottom-0 p-6">
-                <h3 className="font-display text-3xl text-offwhite" style={{ letterSpacing: "-0.01em" }}>{name}</h3>
-                <div className="mt-4 max-h-0 overflow-hidden opacity-0 transition-all duration-500 group-hover:max-h-24 group-hover:opacity-100">
-                  <button
-                    onClick={() => onPick(name)}
-                    className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 font-label text-xs font-semibold text-navy-deep"
-                  >
-                    Quero ir para cá <ArrowRight size={14} />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- How it works ---------------- */
-function HowItWorks() {
-  const steps = [
-    { n: "01", t: "Conte seu sonho", d: "Você nos diz para onde quer ir e o que imagina para a viagem" },
-    { n: "02", t: "Montamos tudo", d: "Criamos um roteiro personalizado com as melhores condições" },
-    { n: "03", t: "Boa viagem", d: "Você viaja tranquilo enquanto cuidamos de cada detalhe" },
-  ];
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 70%", "end 60%"] });
-  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section id="como-funciona" className="bg-offwhite py-28">
-      <div className="mx-auto max-w-6xl px-6">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-16 text-center">
-          <p className="font-label text-xs text-gold">Passo a passo</p>
-          <h2 className="font-display mt-3 text-navy-deep" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.01em" }}>
-            Como realizamos o seu sonho
-          </h2>
-        </motion.div>
+    <section id="servicos" className="bg-[#FAFCFF] py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 md:px-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="font-label text-[10px] font-semibold text-[#F26722]">O que fazemos</p>
+          <h2 className="mt-3 font-display text-3xl font-bold text-[#0A2540] md:text-4xl">Nossos serviços</h2>
+          <p className="mt-3 text-[#64748B]">
+            Soluções completas para facilitar a gestão das viagens corporativas da sua empresa.
+          </p>
+        </div>
 
-        <div ref={ref} className="relative grid grid-cols-1 gap-10 md:grid-cols-3">
-          <div className="absolute left-8 right-8 top-8 hidden h-px bg-navy/10 md:block" />
-          <motion.div style={{ scaleX, transformOrigin: "0% 50%" }} className="absolute left-8 right-8 top-8 hidden h-px bg-gold md:block" />
-          {steps.map((s, i) => (
+        <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {services.map((s, i) => (
             <motion.div
-              key={s.n}
-              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              className="relative text-center md:text-left"
+              key={s.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              whileHover={{ y: -4 }}
+              className="group rounded-xl border border-[#0E86D4]/15 bg-white p-7 transition-all hover:border-[#F26722] hover:shadow-lg"
             >
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-navy-deep font-display text-xl text-gold ring-8 ring-offwhite md:mx-0">
-                {s.n}
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F26722]/10 text-[#F26722]">
+                <s.icon className="h-5 w-5" />
               </div>
-              <h3 className="font-display mt-6 text-2xl text-navy-deep">{s.t}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-navy/60">{s.d}</p>
+              <h3 className="mt-5 font-display text-lg font-bold text-[#0A2540]">{s.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#64748B]">{s.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -404,139 +407,334 @@ function HowItWorks() {
   );
 }
 
-/* ---------------- Gallery ---------------- */
-function Gallery() {
-  const imgs = [
-    { src: "https://images.unsplash.com/photo-1470004914212-05527e49370b?auto=format&fit=crop&w=1400&q=80", span: "md:col-span-2 md:row-span-2 aspect-square" },
-    { src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1000&q=80", span: "aspect-square" },
-    { src: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1000&q=80", span: "aspect-square" },
-    { src: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1400&q=80", span: "md:col-span-2 aspect-[2/1]" },
-    { src: "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1000&q=80", span: "aspect-square" },
-    { src: "https://images.unsplash.com/photo-1500835556837-99ac94a94552?auto=format&fit=crop&w=1000&q=80", span: "aspect-square" },
+/* ---------------- WHY US ---------------- */
+function WhyUsSection() {
+  const items = [
+    { icon: Heart, title: "Paixão pelo Turismo", desc: "Experiência e expertise para atender sua empresa da melhor maneira." },
+    { icon: Clock, title: "Horário Diferenciado", desc: "Atendimento 24h, inclusive em feriados, sem interrupções." },
+    { icon: Award, title: "Qualidade", desc: "Preocupação com eficácia e qualidade em cada detalhe do atendimento." },
+    { icon: BarChart3, title: "Controle e Gestão", desc: "Relatórios claros e transparentes para uma visão estratégica das despesas." },
+    { icon: User, title: "Consultores Plenos", desc: "Consultores com mais de 5 anos de mercado, alinhados à sua necessidade." },
+    { icon: CheckCircle2, title: "Compliance", desc: "Gestão da política de viagens da sua empresa em conformidade e controle." },
   ];
+
   return (
-    <section className="bg-sand py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-12 text-center">
-          <p className="font-label text-xs text-gold">Momentos</p>
-          <h2 className="font-display mt-3 text-navy-deep" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.01em" }}>
-            Viagens que viram memórias
-          </h2>
-        </motion.div>
-        <motion.div
-          initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}
-          variants={{ show: { transition: { staggerChildren: 0.08 } } }}
-          className="grid auto-rows-[minmax(0,1fr)] grid-cols-2 gap-4 md:grid-cols-4"
-        >
-          {imgs.map((img, i) => (
-            <motion.div key={i} variants={fadeUp} custom={i} className={`overflow-hidden rounded-xl ${img.span}`}>
-              <img src={img.src} alt="" className="h-full w-full object-cover transition duration-700 hover:scale-105" />
+    <section id="diferenciais" className="bg-[#0A2540] py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 md:px-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="font-label text-[10px] font-semibold text-[#F26722]">Por que nos escolher</p>
+          <h2 className="mt-3 font-display text-3xl font-bold text-[#FAFCFF] md:text-4xl">O que nos faz diferente</h2>
+          <p className="mt-3 text-[#CBD5E1]">
+            Nosso diferencial é estar próximo aos nossos clientes, entendendo suas necessidades e objetivos.
+          </p>
+        </div>
+
+        <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {items.map((s, i) => (
+            <motion.div
+              key={s.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              whileHover={{ y: -4 }}
+              className="rounded-xl p-7 transition-all"
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(242,103,34,0.3)",
+                backdropFilter: "blur(10px)",
+              }}
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F26722]/15 text-[#F26722]">
+                <s.icon className="h-5 w-5" />
+              </div>
+              <h3 className="mt-5 font-display text-lg font-bold text-[#FAFCFF]">{s.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#CBD5E1]">{s.desc}</p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 }
 
-/* ---------------- Quiz ---------------- */
-type Cat = "praia" | "cultura" | "aventura" | "luxo";
-const questions: { q: string; opts: { label: string; cat: Cat }[] }[] = [
-  { q: "Qual tipo de cenário mais te atrai?", opts: [
-    { label: "Praias paradisíacas", cat: "praia" }, { label: "Cidades históricas e cultura", cat: "cultura" },
-    { label: "Aventura e natureza", cat: "aventura" }, { label: "Luxo e sofisticação", cat: "luxo" }] },
-  { q: "Como você imagina a viagem dos sonhos?", opts: [
-    { label: "Relaxando sem pressa", cat: "praia" }, { label: "Explorando cada detalhe", cat: "cultura" },
-    { label: "Vivendo emoções fortes", cat: "aventura" }, { label: "Com todo o conforto possível", cat: "luxo" }] },
-  { q: "Com quem você costuma viajar?", opts: [
-    { label: "Em família", cat: "praia" }, { label: "Com meu par", cat: "luxo" },
-    { label: "Com amigos", cat: "aventura" }, { label: "Sozinho ou a trabalho", cat: "cultura" }] },
-  { q: "O que não pode faltar na sua viagem?", opts: [
-    { label: "Sol e mar", cat: "praia" }, { label: "Museus e gastronomia", cat: "cultura" },
-    { label: "Trilhas e adrenalina", cat: "aventura" }, { label: "Hotéis incríveis", cat: "luxo" }] },
-  { q: "Qual clima combina mais com você?", opts: [
-    { label: "Calor tropical", cat: "praia" }, { label: "Clima ameno de cidade", cat: "cultura" },
-    { label: "Ar livre e natureza", cat: "aventura" }, { label: "Tanto faz, quero conforto", cat: "luxo" }] },
-  { q: "Quanto tempo você quer que a viagem dure?", opts: [
-    { label: "Uma semana relaxando", cat: "praia" }, { label: "Alguns dias explorando", cat: "cultura" },
-    { label: "O máximo de aventura possível", cat: "aventura" }, { label: "O tempo do requinte", cat: "luxo" }] },
-  { q: "O que faria essa viagem ser inesquecível?", opts: [
-    { label: "Pôr do sol na praia", cat: "praia" }, { label: "Descobrir uma nova cultura", cat: "cultura" },
-    { label: "Uma experiência radical", cat: "aventura" }, { label: "Ser tratado como realeza", cat: "luxo" }] },
-];
-const results: Record<Cat, { title: string; text: string; wa: string }> = {
-  praia: {
-    title: "Seu destino é o paraíso tropical",
-    text: "Você merece sol, mar e descanso. Que tal Maldivas, Cancún ou o Nordeste brasileiro? Vamos montar isso para você!",
-    wa: wa("Fiz o quiz e meu destino ideal é praia! Quero uma cotação."),
-  },
-  cultura: {
-    title: "Seu destino é uma imersão cultural",
-    text: "Cidades históricas, gastronomia e arte te esperam. Paris, Europa ou destinos cheios de história combinam com você!",
-    wa: wa("Fiz o quiz e meu destino ideal é cultural! Quero uma cotação."),
-  },
-  aventura: {
-    title: "Seu destino é pura adrenalina",
-    text: "Trilhas, natureza e emoção são a sua praia. Vamos encontrar o destino de aventura perfeito para você!",
-    wa: wa("Fiz o quiz e meu destino ideal é aventura! Quero uma cotação."),
-  },
-  luxo: {
-    title: "Seu destino é o requinte absoluto",
-    text: "Você merece o melhor. Dubai, resorts exclusivos e experiências de luxo esperam por você. Vamos realizar?",
-    wa: wa("Fiz o quiz e meu destino ideal é luxo! Quero uma cotação."),
-  },
-};
-
-function Quiz({ onLead }: { onLead: (url: string, title: string) => void }) {
-  const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState<Cat[]>([]);
-  const done = step >= questions.length;
-
-  const winner: Cat = (() => {
-    const counts = { praia: 0, cultura: 0, aventura: 0, luxo: 0 } as Record<Cat, number>;
-    answers.forEach((a) => counts[a]++);
-    return (Object.entries(counts).sort((a, b) => b[1] - a[1])[0]?.[0] as Cat) ?? "praia";
-  })();
-
-  function pick(c: Cat) {
-    setAnswers((prev) => [...prev, c]);
-    setStep((s) => s + 1);
-  }
-  function reset() { setStep(0); setAnswers([]); }
-
-  const progress = (step / questions.length) * 100;
+/* ---------------- MANAGEMENT ---------------- */
+function ManagementSection({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const big = useCounter(30, 1800, inView);
 
   return (
-    <section className="bg-navy-deep py-28">
-      <div className="mx-auto max-w-3xl px-6">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-10 text-center">
-          <p className="font-label text-xs text-gold">Descubra sua viagem</p>
-          <h2 className="font-display mt-3 text-offwhite" style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", letterSpacing: "-0.01em" }}>
-            Qual é o seu próximo destino?
+    <section id="gestao" ref={ref} className="bg-[#FAFCFF] py-20 md:py-28">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-4 md:px-8 lg:grid-cols-2">
+        <div>
+          <span className="rounded-full border border-[#0E86D4]/30 bg-[#0E86D4]/10 px-4 py-1.5 font-label text-[10px] font-semibold text-[#0E86D4]">
+            Redução de gastos e controle total
+          </span>
+          <h2 className="mt-5 font-display text-3xl font-bold text-[#0A2540] md:text-4xl">
+            Economia de tempo e custo mensal
           </h2>
-          <p className="mt-3 text-gold/90">Responda 7 perguntas e descubra a viagem perfeita para você.</p>
-        </motion.div>
+          <div className="mt-6 flex items-center gap-5">
+            <p className="font-display text-7xl font-black leading-none text-[#F26722] md:text-8xl">{big}%</p>
+            <p className="max-w-[200px] text-sm font-medium text-[#0A2540]">Redução média nos custos de viagens</p>
+          </div>
+          <p className="mt-6 text-[#64748B]">
+            Gerenciamos a política de viagens da sua empresa através dos nossos sistemas para proporcionar controle e substancial economia nos gastos.
+          </p>
+
+          <div className="mt-8 space-y-5">
+            {[
+              { n: "01", t: "Relatórios Gerenciais", d: "Relatórios personalizados on-line: saving, antecedência, desvio de política e mais." },
+              { n: "02", t: "Dashboard Inteligente", d: "Monitoramento de performance e gestão de metas em tempo real." },
+              { n: "03", t: "Business Intelligence", d: "Vários relatórios e KPIs importantes para a gestão total da sua empresa." },
+            ].map((f) => (
+              <div key={f.n} className="flex gap-4">
+                <span className="font-display text-2xl font-bold text-[#0E86D4]">{f.n}</span>
+                <div>
+                  <h4 className="font-display text-base font-bold text-[#0A2540]">{f.t}</h4>
+                  <p className="mt-1 text-sm text-[#64748B]">{f.d}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <button
+            onClick={() => openLead()}
+            className="mt-8 inline-flex items-center gap-2 rounded-lg bg-[#F26722] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E]"
+          >
+            Quero economizar <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
+
+        <ManagementDashboard />
+      </div>
+    </section>
+  );
+}
+
+function ManagementDashboard() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="relative"
+    >
+      <div
+        className="rounded-2xl bg-white p-6"
+        style={{
+          border: "1px solid rgba(14,134,212,0.15)",
+          boxShadow: "0 30px 60px -20px rgba(10,37,64,0.2)",
+        }}
+      >
+        <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-4">
+          <div className="flex items-center gap-2">
+            <FileBarChart className="h-5 w-5 text-[#0E86D4]" />
+            <p className="font-display text-base font-bold text-[#0A2540]">Relatório Mensal</p>
+          </div>
+          <span className="rounded-md bg-[#F26722]/10 px-2 py-1 text-[10px] font-semibold text-[#F26722]">Novembro</span>
+        </div>
+
+        {/* Bar chart */}
+        <div className="mt-5">
+          <p className="font-label text-[9px] font-semibold text-[#64748B]">Gastos por centro de custo</p>
+          <div className="mt-4 flex items-end justify-between gap-2 h-32">
+            {[65, 40, 80, 55, 90, 45, 70].map((h, i) => (
+              <div key={i} className="flex flex-1 flex-col items-center gap-1">
+                <motion.div
+                  initial={{ height: 0 }}
+                  whileInView={{ height: `${h}%` }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: i * 0.08 }}
+                  className="w-full rounded-t bg-gradient-to-t from-[#0E86D4] to-[#0E86D4]/60"
+                />
+              </div>
+            ))}
+          </div>
+          <div className="mt-2 flex justify-between text-[9px] text-[#94A3B8]">
+            {["TI","RH","Cml","Fin","Ops","Jur","Dir"].map(m => <span key={m} className="flex-1 text-center">{m}</span>)}
+          </div>
+        </div>
+
+        {/* Fake table */}
+        <div className="mt-6 rounded-lg border border-[#E2E8F0]">
+          <div className="border-b border-[#E2E8F0] bg-[#F1F5F9] px-4 py-2">
+            <p className="font-label text-[9px] font-semibold text-[#64748B]">Últimas viagens</p>
+          </div>
+          {[
+            { d: "SAO → GIG", v: "R$ 890", s: "Compliance" },
+            { d: "SAO → BSB", v: "R$ 1.240", s: "Compliance" },
+            { d: "SAO → REC", v: "R$ 1.680", s: "Compliance" },
+          ].map((row, i) => (
+            <div key={i} className="flex items-center justify-between px-4 py-2.5 text-[11px]">
+              <div className="flex items-center gap-2">
+                <Plane className="h-3 w-3 text-[#0E86D4]" />
+                <span className="font-medium text-[#0A2540]">{row.d}</span>
+              </div>
+              <span className="text-[#64748B]">{row.v}</span>
+              <span className="rounded bg-[#0E86D4]/10 px-2 py-0.5 text-[9px] font-semibold text-[#0E86D4]">{row.s}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ---------------- PROCESS ---------------- */
+function ProcessSection() {
+  const steps = [
+    { n: "01", t: "Consultoria Gratuita", d: "Análise completa do seu cenário atual e necessidades." },
+    { n: "02", t: "Proposta Personalizada", d: "Soluções desenhadas para o perfil da sua empresa." },
+    { n: "03", t: "Implementação", d: "Integração e treinamento da sua equipe no sistema." },
+    { n: "04", t: "Economia Contínua", d: "Acompanhamento, relatórios e otimização mensal." },
+  ];
+  return (
+    <section className="bg-[#F1F5F9] py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 md:px-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="font-label text-[10px] font-semibold text-[#F26722]">Processo</p>
+          <h2 className="mt-3 font-display text-3xl font-bold text-[#0A2540] md:text-4xl">
+            Como começamos a economizar juntos
+          </h2>
+        </div>
+
+        <div className="relative mt-16">
+          <div className="absolute left-0 right-0 top-8 hidden h-0.5 bg-[#F26722]/20 lg:block" />
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5 }}
+            className="absolute left-0 right-0 top-8 hidden h-0.5 origin-left bg-[#F26722] lg:block"
+          />
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-4">
+            {steps.map((s, i) => (
+              <motion.div
+                key={s.n}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="relative flex flex-col items-center text-center"
+              >
+                <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-[#F26722] font-display text-lg font-bold text-white shadow-lg shadow-[#F26722]/30">
+                  {s.n}
+                </div>
+                <h3 className="mt-5 font-display text-lg font-bold text-[#0A2540]">{s.t}</h3>
+                <p className="mt-2 max-w-[240px] text-sm text-[#64748B]">{s.d}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- QUIZ ---------------- */
+type QuizOption = { label: string; pts: number };
+type QuizQuestion = { q: string; options: QuizOption[] };
+
+const QUIZ: QuizQuestion[] = [
+  { q: "Sua empresa realiza viagens corporativas com que frequência?", options: [
+    { label: "Toda semana", pts: 3 }, { label: "Todo mês", pts: 2 }, { label: "Ocasionalmente", pts: 1 }, { label: "Raramente", pts: 0 }
+  ]},
+  { q: "Quem cuida da compra de passagens e reservas hoje?", options: [
+    { label: "Um funcionário sem experiência", pts: 3 }, { label: "Uma agência que não gosto", pts: 3 }, { label: "Eu mesmo(a)", pts: 2 }, { label: "Uma agência confiável", pts: 0 }
+  ]},
+  { q: "Você tem visibilidade dos gastos totais com viagens da empresa?", options: [
+    { label: "Não faço ideia", pts: 3 }, { label: "Tenho uma noção geral", pts: 2 }, { label: "Razoavelmente", pts: 1 }, { label: "Sim, controle total", pts: 0 }
+  ]},
+  { q: "Sua empresa tem uma política de viagens formal e aplicada?", options: [
+    { label: "Não", pts: 3 }, { label: "Sim, mas ninguém segue", pts: 2 }, { label: "Em construção", pts: 1 }, { label: "Sim, aplicada e monitorada", pts: 0 }
+  ]},
+  { q: "Você recebe relatórios claros sobre despesas de viagem?", options: [
+    { label: "Nunca", pts: 3 }, { label: "Raramente", pts: 2 }, { label: "Às vezes", pts: 1 }, { label: "Sempre", pts: 0 }
+  ]},
+  { q: "Quando surge uma urgência de viagem fora do horário comercial, o que acontece?", options: [
+    { label: "É um caos", pts: 3 }, { label: "Perdemos tempo resolvendo", pts: 2 }, { label: "Nos viramos", pts: 1 }, { label: "Temos suporte 24h", pts: 0 }
+  ]},
+  { q: "Gostaria de reduzir os custos de viagem da sua empresa em até 30%?", options: [
+    { label: "Sim, com urgência", pts: 3 }, { label: "Sim, seria ótimo", pts: 2 }, { label: "Talvez", pts: 1 }, { label: "Já reduzimos", pts: 0 }
+  ]},
+];
+
+function QuizSection({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+  const [step, setStep] = useState(0);
+  const [score, setScore] = useState(0);
+  const [done, setDone] = useState(false);
+
+  function answer(pts: number) {
+    const s = score + pts;
+    if (step === QUIZ.length - 1) {
+      setScore(s);
+      setDone(true);
+    } else {
+      setScore(s);
+      setStep(step + 1);
+    }
+  }
+
+  function reset() { setStep(0); setScore(0); setDone(false); }
+
+  const progress = done ? 100 : (step / QUIZ.length) * 100;
+
+  const result = (() => {
+    if (score >= 14) return {
+      title: "Sua empresa pode economizar muito com gestão profissional",
+      text: "Suas respostas indicam que há grande espaço para reduzir custos e ganhar controle sobre as viagens corporativas. Vamos conversar sobre como podemos ajudar.",
+      cta: "Quero Uma Consultoria Gratuita",
+      url: `${WHATSAPP_BASE}?text=${encodeURIComponent("Fiz o quiz e quero uma consultoria gratuita de viagens corporativas.")}`,
+    };
+    if (score >= 7) return {
+      title: "Sua gestão está no caminho, mas dá para otimizar",
+      text: "Você tem alguma estrutura, mas com a gestão certa é possível economizar ainda mais e ter total controle.",
+      cta: "Quero Otimizar Minha Gestão",
+      url: `${WHATSAPP_BASE}?text=${encodeURIComponent("Fiz o quiz e quero otimizar a gestão de viagens da minha empresa.")}`,
+    };
+    return {
+      title: "Sua gestão já está bem estruturada",
+      text: "Mesmo assim, uma consultoria pode revelar oportunidades adicionais de economia. Vamos conversar?",
+      cta: "Quero Uma Análise",
+      url: `${WHATSAPP_BASE}?text=${encodeURIComponent("Fiz o quiz e quero uma análise da gestão de viagens corporativas da minha empresa.")}`,
+    };
+  })();
+
+  return (
+    <section className="bg-[#FAFCFF] py-20 md:py-28">
+      <div className="mx-auto max-w-3xl px-4 md:px-8">
+        <div className="text-center">
+          <p className="font-label text-[10px] font-semibold text-[#F26722]">Diagnóstico</p>
+          <h2 className="mt-3 font-display text-3xl font-bold text-[#0A2540] md:text-4xl">
+            Sua empresa está pagando mais do que deveria em viagens?
+          </h2>
+          <p className="mt-3 text-[#64748B]">
+            Responda 7 perguntas e descubra quanto pode economizar.
+          </p>
+        </div>
 
         <div
-          className="relative rounded-3xl p-8 md:p-10"
+          className="mt-12 rounded-2xl bg-white p-8 md:p-10"
           style={{
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(245,184,65,0.35)",
-            backdropFilter: "blur(14px)",
-            boxShadow: "0 30px 80px -30px rgba(0,0,0,0.6), 0 0 60px -30px rgba(245,184,65,0.3)",
+            border: "1px solid rgba(14,134,212,0.2)",
+            boxShadow: "0 20px 50px -20px rgba(10,37,64,0.15)",
           }}
         >
-          {!done && (
-            <>
-              <div className="mb-2 flex items-center justify-between font-label text-[10px] text-offwhite/70">
-                <span>Pergunta {step + 1} de {questions.length}</span>
-                <span>{Math.round(progress)}%</span>
-              </div>
-              <div className="h-1 overflow-hidden rounded-full bg-white/10">
-                <motion.div className="h-full bg-gold" animate={{ width: `${progress}%` }} transition={{ duration: 0.4 }} />
-              </div>
-            </>
-          )}
+          {/* Progress */}
+          <div className="mb-8 flex items-center gap-4">
+            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-[#F1F5F9]">
+              <motion.div
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.4 }}
+                className="h-full bg-[#F26722]"
+              />
+            </div>
+            <span className="font-label text-[10px] font-semibold text-[#64748B]">
+              {done ? "Concluído" : `${step + 1}/${QUIZ.length}`}
+            </span>
+          </div>
 
           <AnimatePresence mode="wait">
             {!done ? (
@@ -545,19 +743,19 @@ function Quiz({ onLead }: { onLead: (url: string, title: string) => void }) {
                 initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -40 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-8"
+                transition={{ duration: 0.3 }}
               >
-                <h3 className="font-display text-2xl text-offwhite md:text-3xl">{questions[step].q}</h3>
+                <h3 className="font-display text-xl font-bold text-[#0A2540] md:text-2xl">
+                  {QUIZ[step].q}
+                </h3>
                 <div className="mt-6 grid gap-3">
-                  {questions[step].opts.map((o) => (
+                  {QUIZ[step].options.map((o) => (
                     <button
                       key={o.label}
-                      onClick={() => pick(o.cat)}
-                      className="group flex items-center justify-between rounded-2xl border border-white/15 bg-white/5 px-5 py-4 text-left text-offwhite transition hover:border-gold hover:bg-gold/10"
+                      onClick={() => answer(o.pts)}
+                      className="rounded-lg border border-[#E2E8F0] bg-white px-5 py-4 text-left text-sm font-medium text-[#0A2540] transition hover:border-[#0E86D4] hover:bg-[#0E86D4]/5"
                     >
-                      <span>{o.label}</span>
-                      <ArrowRight size={16} className="text-gold opacity-0 transition group-hover:opacity-100" />
+                      {o.label}
                     </button>
                   ))}
                 </div>
@@ -565,27 +763,30 @@ function Quiz({ onLead }: { onLead: (url: string, title: string) => void }) {
             ) : (
               <motion.div
                 key="result"
-                initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="mt-4 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="text-center"
               >
-                <p className="font-label text-xs text-gold">Seu resultado</p>
-                <h3 className="font-display mt-3 text-3xl text-offwhite md:text-4xl">{results[winner].title}</h3>
-                <p className="mx-auto mt-4 max-w-xl text-offwhite/80">{results[winner].text}</p>
-                <div className="mt-8 space-y-3">
-                  <button
-                    onClick={() => onLead(results[winner].wa, "Quero essa viagem")}
-                    className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-gold px-6 py-4 font-label text-sm font-semibold text-navy-deep transition hover:brightness-110"
-                  >
-                    <WhatsAppIcon size={20} /> Quero Essa Viagem
-                  </button>
-                  <button
-                    onClick={reset}
-                    className="inline-flex w-full items-center justify-center rounded-full border border-offwhite/40 px-6 py-3 font-label text-xs text-offwhite transition hover:bg-white/10"
-                  >
-                    Refazer o quiz
-                  </button>
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#F26722]/10 text-[#F26722]">
+                  <Zap className="h-6 w-6" />
                 </div>
+                <h3 className="mt-5 font-display text-2xl font-bold text-[#0A2540] md:text-3xl">
+                  {result.title}
+                </h3>
+                <p className="mx-auto mt-4 max-w-lg text-[#64748B]">{result.text}</p>
+                <button
+                  onClick={() => openLead(result.url, result.cta)}
+                  className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#F26722] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#F58B4E]"
+                >
+                  <WhatsAppIcon className="h-4 w-4" /> {result.cta}
+                </button>
+                <button
+                  onClick={reset}
+                  className="mt-3 inline-flex w-full items-center justify-center rounded-lg border-2 border-[#0E86D4] px-6 py-3 text-sm font-semibold text-[#0E86D4] transition hover:bg-[#0E86D4]/5"
+                >
+                  Refazer o quiz
+                </button>
               </motion.div>
             )}
           </AnimatePresence>
@@ -595,77 +796,82 @@ function Quiz({ onLead }: { onLead: (url: string, title: string) => void }) {
   );
 }
 
-/* ---------------- Testimonials ---------------- */
-function Testimonials({ onCta }: { onCta: () => void }) {
-  const items = [
-    { t: "A Viagem dos Sonhos cuidou de absolutamente tudo na nossa lua de mel nas Maldivas. Foi impecável, do voo ao hotel. Recomendo de olhos fechados!", n: "Ana e Pedro", r: "Lua de mel, Maldivas" },
-    { t: "Precisava organizar uma viagem corporativa para minha equipe e foi tudo resolvido com rapidez e profissionalismo. Melhor agência que já contratei.", n: "Ricardo M.", r: "Viagem corporativa" },
-    { t: "Sempre sonhei em conhecer a Europa e eles montaram um roteiro perfeito, dentro do meu orçamento e parcelado. Experiência inesquecível!", n: "Juliana S.", r: "Pacote Europa" },
-    { t: "Atendimento nota mil! Tiraram todas as minhas dúvidas e conseguiram passagens muito mais baratas do que eu tinha achado. Voltarei a viajar com eles com certeza.", n: "Carlos A.", r: "Passagens internacionais" },
-  ];
-  const [idx, setIdx] = useState(0);
+/* ---------------- TESTIMONIALS ---------------- */
+const TESTIMONIALS = [
+  { q: "Reduzimos os custos de viagens da empresa em 32% no primeiro semestre. O atendimento 24h e os relatórios personalizados fizeram toda a diferença na nossa gestão.", n: "Ricardo Almeida", r: "Diretor Financeiro, Tech Solutions" },
+  { q: "Precisávamos de uma agência que entendesse a dinâmica corporativa e agilizasse os processos. Encontramos exatamente isso na Viagens dos Sonhos. Recomendo.", n: "Fernanda Costa", r: "Gerente de Operações, Grupo Industrial" },
+  { q: "O sistema online facilitou muito a rotina do nosso departamento. Reservas rápidas, política aplicada automaticamente e relatórios que ajudam nas decisões estratégicas.", n: "Marcos Vieira", r: "CFO, Consultoria Empresarial" },
+  { q: "Atendimento consultivo de verdade. Não são só vendedores de passagens, são parceiros que entendem o negócio e propõem soluções que economizam tempo e dinheiro.", n: "Patrícia Souza", r: "Head de Compras, Multinacional" },
+];
+
+function TestimonialsSection({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+  const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
+
   useEffect(() => {
     if (paused) return;
-    const id = setInterval(() => setIdx((i) => (i + 1) % items.length), 4000);
-    return () => clearInterval(id);
-  }, [paused, items.length]);
+    const t = setInterval(() => setI((v) => (v + 1) % TESTIMONIALS.length), 4000);
+    return () => clearInterval(t);
+  }, [paused]);
 
+  const t = TESTIMONIALS[i];
   return (
-    <section className="bg-offwhite py-28">
-      <div className="mx-auto max-w-4xl px-6">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-12 text-center">
-          <p className="font-label text-xs text-gold">Experiências</p>
-          <h2 className="font-display mt-3 text-navy-deep" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.01em" }}>
-            Quem viajou, recomenda
+    <section className="bg-[#FAFCFF] py-20 md:py-28">
+      <div className="mx-auto max-w-4xl px-4 md:px-8">
+        <div className="text-center">
+          <p className="font-label text-[10px] font-semibold text-[#F26722]">Cases de sucesso</p>
+          <h2 className="mt-3 font-display text-3xl font-bold text-[#0A2540] md:text-4xl">
+            O que dizem os nossos clientes empresariais
           </h2>
-          <p className="mt-3 text-navy/60">Histórias reais de quem confiou seus sonhos a nós.</p>
-        </motion.div>
+          <p className="mt-3 text-[#64748B]">
+            Empresas que confiaram sua gestão de viagens à Viagens dos Sonhos.
+          </p>
+        </div>
 
         <div
-          className="relative rounded-3xl p-8 md:p-10"
-          style={{
-            background: "rgba(10,30,63,0.03)",
-            border: "1px solid rgba(245,184,65,0.4)",
-            backdropFilter: "blur(8px)",
-          }}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
+          className="mt-12"
         >
-          <Quote className="text-gold" size={36} />
           <AnimatePresence mode="wait">
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, x: 30 }}
+              key={i}
+              initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
-              transition={{ duration: 0.5 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.4 }}
+              className="rounded-xl bg-white p-8 md:p-10"
+              style={{
+                border: "1px solid #E2E8F0",
+                boxShadow: "0 15px 40px -15px rgba(10,37,64,0.12)",
+              }}
             >
-              <p className="font-display mt-4 text-xl italic leading-relaxed text-navy-deep md:text-2xl">
-                {items[idx].t}
-              </p>
-              <div className="mt-6 h-px w-16 bg-gold" />
-              <div className="mt-6 flex items-center gap-4">
-                <div className="h-11 w-11 rounded-full bg-navy-deep/10" />
-                <div>
-                  <p className="font-label text-sm text-gold">{items[idx].n}</p>
-                  <p className="text-xs text-navy/60">{items[idx].r}</p>
+              <span className="font-display text-5xl leading-none text-[#F26722]">"</span>
+              <p className="mt-2 text-[15px] leading-relaxed text-[#0A2540]">{t.q}</p>
+              <div className="mt-6 border-t border-[#E2E8F0] pt-6 flex items-center gap-4">
+                <div className="h-11 w-11 shrink-0 rounded-full bg-gradient-to-br from-[#0E86D4] to-[#0A2540]" />
+                <div className="flex-1">
+                  <p className="font-display text-sm font-bold text-[#0A2540]">{t.n}</p>
+                  <p className="text-xs text-[#64748B]">{t.r}</p>
                 </div>
-                <div className="ml-auto flex gap-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} size={14} className="fill-gold text-gold" />
+                <div className="flex gap-0.5 text-[#F26722]">
+                  {[0,1,2,3,4].map(s => (
+                    <svg key={s} viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                    </svg>
                   ))}
                 </div>
               </div>
             </motion.div>
           </AnimatePresence>
-          <div className="mt-8 flex justify-center gap-2">
-            {items.map((_, i) => (
+
+          <div className="mt-6 flex justify-center gap-2">
+            {TESTIMONIALS.map((_, idx) => (
               <button
-                key={i} onClick={() => setIdx(i)}
-                className="h-1.5 rounded-full transition-all"
-                style={{ width: i === idx ? 24 : 8, background: i === idx ? "var(--gold)" : "rgba(10,30,63,0.2)" }}
-                aria-label={`Depoimento ${i + 1}`}
+                key={idx}
+                onClick={() => setI(idx)}
+                aria-label={`Depoimento ${idx + 1}`}
+                className={`h-2 rounded-full transition-all ${idx === i ? "w-8 bg-[#0E86D4]" : "w-2 bg-[#0E86D4]/30"}`}
               />
             ))}
           </div>
@@ -673,10 +879,10 @@ function Testimonials({ onCta }: { onCta: () => void }) {
 
         <div className="mt-10 text-center">
           <button
-            onClick={onCta}
-            className="inline-flex items-center gap-2 rounded-full bg-gold px-8 py-4 font-label text-sm font-semibold text-navy-deep transition hover:brightness-110"
+            onClick={() => openLead(`${WHATSAPP_BASE}?text=${encodeURIComponent("Vi os depoimentos e quero uma cotação de viagens corporativas.")}`)}
+            className="inline-flex items-center gap-2 rounded-lg bg-[#F26722] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E]"
           >
-            Quero realizar meu sonho <ArrowRight size={16} />
+            Quero esse resultado na minha empresa <ArrowRight className="h-4 w-4" />
           </button>
         </div>
       </div>
@@ -684,32 +890,38 @@ function Testimonials({ onCta }: { onCta: () => void }) {
   );
 }
 
-/* ---------------- Final CTA ---------------- */
-function FinalCta({ onCta }: { onCta: () => void }) {
+/* ---------------- FINAL CTA ---------------- */
+function FinalCTA({ openLead }: { openLead: (url?: string, title?: string) => void }) {
   return (
-    <section className="relative overflow-hidden bg-navy-deep py-32">
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2400&q=80')",
-          backgroundSize: "cover", backgroundPosition: "center",
-        }}
-      />
-      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,30,63,0.85), rgba(10,30,63,0.95))" }} />
-      <div className="relative mx-auto max-w-4xl px-6 text-center">
+    <section
+      id="contato"
+      className="py-24 md:py-32"
+      style={{ background: "linear-gradient(135deg, #061838 0%, #0A2540 100%)" }}
+    >
+      <div className="mx-auto max-w-4xl px-4 text-center md:px-8">
         <motion.h2
-          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="font-display text-offwhite"
-          style={{ fontSize: "clamp(2.25rem, 5vw, 4.5rem)", lineHeight: 1.1, letterSpacing: "-0.02em" }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="font-display text-4xl font-bold text-[#FAFCFF] md:text-5xl lg:text-6xl"
         >
-          Sua viagem dos sonhos <em className="text-gold">começa aqui</em>
+          Pronto para transformar a gestão de viagens da sua empresa?
         </motion.h2>
-        <p className="mt-6 text-gold/90">Solicite sua cotação agora, sem compromisso.</p>
+        <p className="mx-auto mt-5 max-w-2xl text-lg text-[#CBD5E1]">
+          Passagens, hotéis e gestão completa para sua empresa. Atendimento imediato no WhatsApp.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          {["Consultoria Gratuita", "Proposta Personalizada"].map(b => (
+            <span key={b} className="inline-flex items-center gap-2 rounded-full border border-[#F26722]/40 bg-[#F26722]/10 px-4 py-2 text-xs font-semibold text-[#F58B4E]">
+              <CheckCircle2 className="h-3.5 w-3.5" /> {b}
+            </span>
+          ))}
+        </div>
         <button
-          onClick={onCta}
-          className="mt-10 inline-flex items-center gap-2 rounded-full bg-gold px-10 py-5 font-label text-sm font-semibold text-navy-deep transition hover:brightness-110"
+          onClick={() => openLead()}
+          className="mt-10 inline-flex items-center gap-2 rounded-lg bg-[#F26722] px-8 py-4 text-base font-semibold text-white shadow-xl shadow-[#F26722]/30 transition hover:bg-[#F58B4E]"
         >
-          Solicitar Minha Cotação <ArrowRight size={16} />
+          <WhatsAppIcon className="h-5 w-5" /> Falar com um Consultor Agora
         </button>
       </div>
     </section>
@@ -717,147 +929,102 @@ function FinalCta({ onCta }: { onCta: () => void }) {
 }
 
 /* ---------------- FAQ ---------------- */
-function FAQ() {
-  const items = [
-    ["Como solicito uma cotação?", "É só clicar em \"Solicitar Cotação\", preencher seu nome e você será direcionado para o nosso WhatsApp, onde faremos um atendimento personalizado para a sua viagem."],
-    ["Vocês são uma agência confiável?", "Sim! Somos agente autorizado CVC, líder em turismo no Brasil, oferecendo segurança e confiança em cada etapa da sua viagem."],
-    ["Quais serviços vocês oferecem?", "Passagens aéreas nacionais e internacionais, pacotes de viagens, cruzeiros, viagens corporativas, hospedagem, excursões, eventos esportivos, locação de veículos e seguro viagem."],
-    ["É possível parcelar a viagem?", "Sim, oferecemos parcelamento facilitado para que você realize a sua viagem com condições que cabem no seu bolso."],
-    ["Vocês atendem viagens corporativas?", "Sim, temos soluções completas para viagens empresariais, com atendimento personalizado para você ou sua empresa."],
-    ["O atendimento é presencial ou online?", "Atendemos todo o Brasil de forma online, pelo WhatsApp, com todo o cuidado e agilidade que a sua viagem merece."],
-    ["Vocês ajudam a escolher o destino?", "Com certeza! Nossa equipe é especializada e te ajuda a escolher o destino perfeito de acordo com o seu perfil, orçamento e sonhos."],
-    ["Como funciona o seguro viagem?", "Oferecemos seguro viagem para que você viaje com total tranquilidade e proteção. Informamos todos os detalhes na sua cotação."],
-  ] as const;
+const FAQS = [
+  { q: "Como funciona a gestão de viagens corporativas?", a: "Cuidamos de todo o processo de viagens da sua empresa, desde a cotação e emissão de passagens até o suporte durante a viagem, com sistema online, relatórios gerenciais e atendimento 24h." },
+  { q: "Vocês atendem empresas de todos os tamanhos?", a: "Sim, atendemos desde pequenas empresas até grandes corporações, adaptando nossas soluções ao perfil e volume de viagens do cliente." },
+  { q: "Como é feito o atendimento 24h?", a: "Nossa equipe está disponível 24 horas por dia, 7 dias por semana, inclusive feriados, para atender urgências e imprevistos das viagens dos seus colaboradores." },
+  { q: "A consultoria inicial tem custo?", a: "Não. Fazemos uma análise gratuita do cenário atual da sua empresa e apresentamos uma proposta personalizada sem compromisso." },
+  { q: "Como funciona a redução de custos?", a: "Através da nossa política de gestão, negociações com fornecedores, monitoramento de saving e uso de relatórios estratégicos, é possível reduzir custos em média em 30%." },
+  { q: "O sistema é integrado com o meu ERP ou sistema interno?", a: "Sim, temos possibilidade de integração com sistemas de gestão internos das empresas. Consulte-nos para verificar a viabilidade específica do seu caso." },
+  { q: "Quais relatórios são disponibilizados?", a: "Relatórios de saving, compliance, gastos por centro de custo, antecedência de compra, desvios de política, KPIs personalizados e muito mais." },
+  { q: "Como faço para começar?", a: "É só clicar em Solicitar Cotação, preencher seu nome, e um consultor entrará em contato pelo WhatsApp para uma análise gratuita do seu cenário." },
+];
+
+function FAQSection() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="bg-sand py-28">
-      <div className="mx-auto max-w-3xl px-6">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mb-12 text-center">
-          <p className="font-label text-xs text-gold">Dúvidas frequentes</p>
-          <h2 className="font-display mt-3 text-navy-deep" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.01em" }}>
+    <section className="bg-[#FAFCFF] py-20 md:py-28">
+      <div className="mx-auto max-w-3xl px-4 md:px-8">
+        <div className="text-center">
+          <p className="font-label text-[10px] font-semibold text-[#F26722]">FAQ</p>
+          <h2 className="mt-3 font-display text-3xl font-bold text-[#0A2540] md:text-4xl">
             Perguntas frequentes
           </h2>
-        </motion.div>
-        <div className="divide-y divide-navy/10 rounded-2xl border border-navy/10 bg-white/50 backdrop-blur">
-          {items.map(([q, a], i) => {
-            const isOpen = open === i;
-            return (
-              <div key={i}>
-                <button
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+        </div>
+        <div className="mt-12 space-y-3">
+          {FAQS.map((f, i) => (
+            <div key={i} className="overflow-hidden rounded-lg border border-[#E2E8F0] bg-white">
+              <button
+                onClick={() => setOpen(open === i ? null : i)}
+                className="flex w-full items-center justify-between px-6 py-5 text-left"
+              >
+                <span className="font-display text-base font-semibold text-[#0A2540]">{f.q}</span>
+                <motion.span
+                  animate={{ rotate: open === i ? 45 : 0 }}
+                  className="ml-4 shrink-0 text-[#F26722]"
                 >
-                  <span className="font-display text-lg text-navy-deep">{q}</span>
-                  <span className="rounded-full bg-gold/20 p-2 text-gold">
-                    {isOpen ? <Minus size={16} /> : <Plus size={16} />}
-                  </span>
-                </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <p className="px-6 pb-6 text-sm leading-relaxed text-navy/70">{a}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M10 4v12M4 10h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+                </motion.span>
+              </button>
+              <AnimatePresence>
+                {open === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <p className="px-6 pb-5 text-sm leading-relaxed text-[#64748B]">{f.a}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------------- Footer ---------------- */
+/* ---------------- FOOTER ---------------- */
 function Footer() {
   return (
-    <footer id="contato" className="bg-navy-deep py-16">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 md:grid-cols-3">
-        <div>
-          <p className="flex items-center gap-2 font-display text-2xl font-bold text-gold">
-            <Plane className="h-6 w-6 -rotate-45" strokeWidth={2} fill="none" />
-            Viagem dos Sonhos
-          </p>
-          <p className="mt-3 text-sm text-offwhite/70">Agência de Viagens, Agente Autorizado CVC</p>
-          <p className="mt-1 text-sm text-offwhite/60 italic">Transformando sonhos em viagens inesquecíveis</p>
+    <footer className="bg-[#061838] py-16 text-[#CBD5E1]">
+      <div className="mx-auto max-w-7xl px-4 md:px-8">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+          <div>
+            <img src="" alt="" className="h-14 w-auto object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+            <p className="font-display text-xl font-bold text-white">Viagens dos Sonhos</p>
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#94A3B8]">
+              Excelência em gestão de viagens corporativas, conectando sua empresa ao mundo com segurança e economia.
+            </p>
+          </div>
+          <div>
+            <p className="font-label text-[10px] font-semibold text-[#F26722]">Contato</p>
+            <div className="mt-4 space-y-3 text-sm">
+              <a href="https://wa.me/5511932195053" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#F26722]">
+                <WhatsAppIcon className="h-4 w-4" /> (11) 93219-5053
+              </a>
+              <a href="#" className="flex items-center gap-2 hover:text-[#F26722]">
+                <Instagram className="h-4 w-4" /> Instagram
+              </a>
+              <p className="text-[#94A3B8]">Atendimento em todo o Brasil</p>
+            </div>
+          </div>
+          <div>
+            <p className="font-label text-[10px] font-semibold text-[#F26722]">Institucional</p>
+            <div className="mt-4 space-y-2 text-sm">
+              <a href="#" className="block hover:text-[#F26722]">Termos de Uso</a>
+              <a href="#" className="block hover:text-[#F26722]">Política de Privacidade</a>
+              <a href="#" className="block hover:text-[#F26722]">Compliance</a>
+            </div>
+          </div>
         </div>
-        <div>
-          <p className="font-label text-xs text-gold">Contato</p>
-          <a href="https://wa.me/5511991335192" target="_blank" rel="noreferrer" className="mt-3 flex items-center gap-2 text-sm text-offwhite/85 hover:text-gold">
-            <Phone size={14} /> (11) 99133-5192
-          </a>
-          <a href="https://instagram.com/agenciaviagensdossonhos" target="_blank" rel="noreferrer" className="mt-2 flex items-center gap-2 text-sm text-offwhite/85 hover:text-gold">
-            <Instagram size={14} /> @agenciaviagensdossonhos
-          </a>
-          <p className="mt-2 flex items-center gap-2 text-sm text-offwhite/60">
-            <MapPin size={14} /> Atendimento em todo o Brasil
-          </p>
+        <div className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-[#64748B]">
+          © 2026 Viagens dos Sonhos. Todos os direitos reservados.
         </div>
-        <div>
-          <p className="font-label text-xs text-gold">Navegação</p>
-          <ul className="mt-3 space-y-2 text-sm text-offwhite/85">
-            <li><a href="#destinos" className="hover:text-gold">Destinos</a></li>
-            <li><a href="#servicos" className="hover:text-gold">Serviços</a></li>
-            <li><a href="#como-funciona" className="hover:text-gold">Como Funciona</a></li>
-          </ul>
-        </div>
-      </div>
-      <div className="mx-auto mt-12 max-w-7xl border-t border-white/10 px-6 pt-6 text-center text-xs text-offwhite/50">
-        © 2026 Viagem dos Sonhos. Todos os direitos reservados.
       </div>
     </footer>
-  );
-}
-
-/* ---------------- Floating WhatsApp ---------------- */
-function FloatingWhatsApp({ onClick }: { onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      aria-label="Falar no WhatsApp"
-      className="fixed bottom-6 right-6 z-[90] flex h-14 w-14 items-center justify-center rounded-full text-white shadow-2xl transition hover:scale-105"
-      style={{ background: "#25D366", animation: "pulse-ring 2.4s infinite" }}
-    >
-      <WhatsAppIcon size={28} />
-    </button>
-  );
-}
-
-/* ---------------- Page ---------------- */
-function HomePage() {
-  const [modal, setModal] = useState<{ open: boolean; url: string; title?: string }>({
-    open: false, url: wa("Quero uma cotação de viagem."),
-  });
-
-  const openLead = (url: string, title?: string) => setModal({ open: true, url, title });
-  const closeLead = () => setModal((m) => ({ ...m, open: false }));
-
-  return (
-    <div className="min-h-screen bg-offwhite text-navy-deep">
-      <ScrollProgress />
-      <Navbar onCta={() => openLead(wa("Quero solicitar uma cotação de viagem."), "Solicitar cotação")} />
-      <main>
-        <Hero onCta={() => openLead(wa("Quero solicitar uma cotação de viagem."), "Solicitar cotação")} />
-        <TrustBar />
-        <Storytelling />
-        <Services />
-        <Destinations onPick={(dest) => openLead(wa(`Quero uma cotação para ${dest}!`), `Vamos para ${dest}?`)} />
-        <HowItWorks />
-        <Gallery />
-        <Quiz onLead={(url, title) => openLead(url, title)} />
-        <Testimonials onCta={() => openLead(wa("Vi os depoimentos e quero uma cotação de viagem."), "Realizar meu sonho")} />
-        <FinalCta onCta={() => openLead(wa("Quero solicitar minha cotação de viagem."), "Solicitar cotação")} />
-        <FAQ />
-      </main>
-      <Footer />
-      <FloatingWhatsApp onClick={() => openLead(wa("Olá! Gostaria de uma cotação de viagem."), "Falar no WhatsApp")} />
-      <LeadCaptureModal open={modal.open} onClose={closeLead} whatsappUrl={modal.url} title={modal.title} />
-    </div>
   );
 }

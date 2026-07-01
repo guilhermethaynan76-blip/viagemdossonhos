@@ -77,24 +77,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Viagem dos Sonhos | Agência de Viagens, Agente Autorizado CVC" },
-      { name: "description", content: "Passagens, pacotes, cruzeiros e experiências inesquecíveis. Sua próxima história começa com uma viagem." },
-      { name: "author", content: "Viagem dos Sonhos" },
-      { property: "og:title", content: "Viagem dos Sonhos | Agência de Viagens, Agente Autorizado CVC" },
-      { property: "og:description", content: "Passagens, pacotes, cruzeiros e experiências inesquecíveis. Sua próxima história começa com uma viagem." },
+      { title: "Viagens dos Sonhos | Gestão Inteligente de Viagens Corporativas" },
+      { name: "description", content: "Plataforma corporativa de gestão de viagens: reduza custos em até 30%, atendimento 24h, relatórios e compliance. Solicite sua cotação." },
+      { name: "author", content: "Viagens dos Sonhos" },
+      { property: "og:title", content: "Viagens dos Sonhos | Gestão Inteligente de Viagens Corporativas" },
+      { property: "og:description", content: "Reduza custos em até 30% com gestão profissional de viagens corporativas. Atendimento 24h, relatórios e compliance." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Viagem dos Sonhos | Agência de Viagens, Agente Autorizado CVC" },
-      { name: "twitter:description", content: "Passagens, pacotes, cruzeiros e experiências inesquecíveis. Sua próxima história começa com uma viagem." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a09ab33e-6c7f-4d0f-a490-f0afaf77fbec/id-preview-37772630--5c7d833a-cda0-471c-ba51-e17fdf6945f8.lovable.app-1782927342726.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a09ab33e-6c7f-4d0f-a490-f0afaf77fbec/id-preview-37772630--5c7d833a-cda0-471c-ba51-e17fdf6945f8.lovable.app-1782927342726.png" },
+      { name: "twitter:title", content: "Viagens dos Sonhos | Gestão Inteligente de Viagens Corporativas" },
+      { name: "twitter:description", content: "Reduza custos em até 30% com gestão profissional de viagens corporativas." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;700&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -105,7 +103,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>
@@ -122,7 +120,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
   );
