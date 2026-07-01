@@ -97,13 +97,25 @@ function Hero({ onCta }: { onCta: () => void }) {
   return (
     <section id="top" ref={ref} className="relative flex min-h-[100svh] items-center overflow-hidden">
       <motion.div
-        style={{
-          y,
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=80')",
-        }}
-        className="absolute inset-0 -top-20 -bottom-20 bg-navy-deep bg-cover bg-center"
-      />
+        style={{ y }}
+        className="absolute inset-0 -top-20 -bottom-20 bg-navy-deep"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=80"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <video
+          src="https://res.cloudinary.com/dkwpz87nw/video/upload/v1782926486/202607011336_xnjn4j.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </motion.div>
       <div
         className="absolute inset-0"
         style={{
