@@ -71,7 +71,7 @@ function HomePage() {
 
       {/* Navbar */}
       <nav
-        className={`fixed left-0 right-0 top-0 z-50 h-[72px] transition-all ${
+        className={`fixed left-0 right-0 top-0 z-50 h-[88px] transition-all ${
           scrolled ? "border-b border-white/10 bg-[#0A2540]/95 backdrop-blur-xl" : "bg-[#0A2540] border-b border-white/10"
         }`}
       >
@@ -80,7 +80,7 @@ function HomePage() {
             <img
               src="https://res.cloudinary.com/dkwpz87nw/image/upload/v1782936767/WhatsApp_Image_2026-07-01_at_17.08.32-removebg-preview_bjdwhz.png"
               alt="Viagens dos Sonhos"
-              className="h-10 w-auto"
+              className="h-16 w-auto md:h-20"
             />
             <span className="font-display text-base font-bold text-white md:text-lg">Viagens dos Sonhos</span>
           </a>
@@ -113,7 +113,7 @@ function HomePage() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="absolute left-0 right-0 top-[72px] border-b border-[#0E86D4]/15 bg-white lg:hidden"
+              className="absolute left-0 right-0 top-[88px] border-b border-[#0E86D4]/15 bg-white lg:hidden"
             >
               <div className="flex flex-col gap-1 p-4">
                 {[["Serviços","#servicos"],["Diferenciais","#diferenciais"],["Gestão","#gestao"],["Contato","#contato"]].map(([label, href]) => (
@@ -176,7 +176,7 @@ function HeroSection({ openLead }: { openLead: (url?: string, title?: string) =>
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden pt-[72px]"
+      className="relative overflow-hidden pt-[88px]"
       style={{ background: "linear-gradient(180deg, #FAFCFF 0%, #E6F3FC 100%)" }}
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 py-16 md:px-8 lg:grid-cols-[55%_45%] lg:gap-8 lg:py-24">
@@ -1001,7 +1001,7 @@ function Footer() {
               <img
                 src="https://res.cloudinary.com/dkwpz87nw/image/upload/v1782936767/WhatsApp_Image_2026-07-01_at_17.08.32-removebg-preview_bjdwhz.png"
                 alt="Viagens dos Sonhos"
-                className="h-12 w-auto"
+                className="h-20 w-auto md:h-24"
               />
               <span className="font-display text-lg font-bold text-white">Viagens dos Sonhos</span>
             </div>
