@@ -4,7 +4,7 @@ import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "fra
 import {
   Shield, CheckCircle2, Briefcase, Globe2, Ship, Building2, Car,
   ShieldCheck, CreditCard, Ticket, Package, PartyPopper, ArrowRight, ChevronDown,
-  Instagram, Phone, MapPin, Quote, Star, Plus, Minus,
+  Instagram, Phone, MapPin, Quote, Star, Plus, Minus, Plane,
 } from "lucide-react";
 import { LeadCaptureModal } from "@/components/LeadCaptureModal";
 
@@ -60,6 +60,7 @@ function Navbar({ onCta }: { onCta: () => void }) {
     >
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between gap-3 px-4 md:h-[76px] md:px-6">
         <a href="#top" className="flex min-w-0 items-center gap-2 md:gap-3">
+          <Plane className="h-5 w-5 shrink-0 -rotate-45 text-gold md:h-6 md:w-6" strokeWidth={2} fill="none" />
           <span className="font-display truncate text-base font-bold text-gold sm:text-xl md:text-2xl">
             Viagem dos Sonhos
           </span>
@@ -779,7 +780,10 @@ function Footer() {
     <footer id="contato" className="bg-navy-deep py-16">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 md:grid-cols-3">
         <div>
-          <p className="font-display text-2xl font-bold text-gold">Viagem dos Sonhos</p>
+          <p className="flex items-center gap-2 font-display text-2xl font-bold text-gold">
+            <Plane className="h-6 w-6 -rotate-45" strokeWidth={2} fill="none" />
+            Viagem dos Sonhos
+          </p>
           <p className="mt-3 text-sm text-offwhite/70">Agência de Viagens, Agente Autorizado CVC</p>
           <p className="mt-1 text-sm text-offwhite/60 italic">Transformando sonhos em viagens inesquecíveis</p>
         </div>
