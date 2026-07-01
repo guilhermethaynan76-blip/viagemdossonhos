@@ -77,7 +77,7 @@ function HomePage() {
       >
         <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 md:px-8">
           <a href="#top" className="flex items-center gap-3">
-            <img src="" alt="" className="h-12 w-auto object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+            <Plane className="h-6 w-6 -rotate-45 text-[#0E86D4]" strokeWidth={2} />
             <span className="font-display text-lg font-bold text-[#0A2540]">
               Viagens dos Sonhos
             </span>
