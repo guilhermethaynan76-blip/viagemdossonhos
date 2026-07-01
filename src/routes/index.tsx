@@ -80,7 +80,7 @@ function HomePage() {
             <img
               src="https://res.cloudinary.com/dkwpz87nw/image/upload/v1782936767/WhatsApp_Image_2026-07-01_at_17.08.32-removebg-preview_bjdwhz.png"
               alt="Viagens dos Sonhos"
-              className="h-10 w-auto"
+              className="h-16 w-auto md:h-20"
             />
             <span className="font-display text-base font-bold text-white md:text-lg">Viagens dos Sonhos</span>
           </a>
@@ -1001,7 +1001,7 @@ function Footer() {
               <img
                 src="https://res.cloudinary.com/dkwpz87nw/image/upload/v1782936767/WhatsApp_Image_2026-07-01_at_17.08.32-removebg-preview_bjdwhz.png"
                 alt="Viagens dos Sonhos"
-                className="h-12 w-auto"
+                className="h-20 w-auto md:h-24"
               />
               <span className="font-display text-lg font-bold text-white">Viagens dos Sonhos</span>
             </div>
