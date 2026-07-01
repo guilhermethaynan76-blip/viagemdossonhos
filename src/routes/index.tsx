@@ -779,9 +779,6 @@ function Footer() {
     <footer id="contato" className="bg-navy-deep py-16">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 md:grid-cols-3">
         <div>
-          <img src="" alt="Viagem dos Sonhos" style={{ height: 60, objectFit: "contain" }}
-            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
-          />
           <p className="font-display text-2xl font-bold text-gold">Viagem dos Sonhos</p>
           <p className="mt-3 text-sm text-offwhite/70">Agência de Viagens, Agente Autorizado CVC</p>
           <p className="mt-1 text-sm text-offwhite/60 italic">Transformando sonhos em viagens inesquecíveis</p>
