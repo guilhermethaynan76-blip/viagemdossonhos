@@ -780,7 +780,10 @@ function Footer() {
     <footer id="contato" className="bg-navy-deep py-16">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 md:grid-cols-3">
         <div>
-          <p className="font-display text-2xl font-bold text-gold">Viagem dos Sonhos</p>
+          <p className="flex items-center gap-2 font-display text-2xl font-bold text-gold">
+            <Plane className="h-6 w-6 -rotate-45" strokeWidth={2} fill="none" />
+            Viagem dos Sonhos
+          </p>
           <p className="mt-3 text-sm text-offwhite/70">Agência de Viagens, Agente Autorizado CVC</p>
           <p className="mt-1 text-sm text-offwhite/60 italic">Transformando sonhos em viagens inesquecíveis</p>
         </div>
