@@ -311,7 +311,7 @@ function Destinations({ onPick }: { onPick: (dest: string) => void }) {
     { name: "Paris", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1400&q=80" },
     { name: "Cancún", img: "https://images.unsplash.com/photo-1552074284-5e88ef1aef18?auto=format&fit=crop&w=1400&q=80" },
     { name: "Dubai", img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=80" },
-    { name: "Nordeste Brasileiro", img: "https://images.unsplash.com/photo-1518509562904-e7ef99cddc85?auto=format&fit=crop&w=1400&q=80" },
+    { name: "Nordeste Brasileiro", img: "https://images.unsplash.com/photo-1596397249129-c7a8f8718873?auto=format&fit=crop&w=1400&q=80" },
     { name: "Europa", img: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1400&q=80" },
   ];
   return (
