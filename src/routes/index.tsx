@@ -137,7 +137,7 @@ function Hero({ onCta }: { onCta: () => void }) {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32 pb-24">
         <motion.div
           initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.12 } } }}
-          className="max-w-3xl"
+          className="max-w-3xl text-center md:text-left"
         >
           <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-gold/50 bg-white/5 px-4 py-2 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" />
@@ -150,10 +150,10 @@ function Hero({ onCta }: { onCta: () => void }) {
           >
             Sua próxima história começa <em className="text-gold">com uma viagem</em>
           </motion.h1>
-          <motion.p variants={fadeUp} className="mt-6 max-w-[540px] text-lg text-offwhite/85">
+          <motion.p variants={fadeUp} className="mx-auto mt-6 max-w-[540px] text-lg text-offwhite/85 md:mx-0">
             Passagens, pacotes, cruzeiros e experiências inesquecíveis. Viaje com quem entende do assunto e realiza sonhos.
           </motion.p>
-          <motion.div variants={fadeUp} className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <motion.div variants={fadeUp} className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center md:justify-start">
             <button
               onClick={onCta}
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 font-label text-sm font-semibold text-navy-deep transition hover:brightness-110"
