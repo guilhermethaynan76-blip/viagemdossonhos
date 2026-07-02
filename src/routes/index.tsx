@@ -121,7 +121,6 @@ function HomePage() {
                   <a key={href} href={href} onClick={() => setMobileOpen(false)} className="rounded-md px-3 py-3 text-sm font-medium text-[#0A2540] hover:bg-[#F1F5F9]">{label}</a>
                 ))}
                 <Link to="/lazer" onClick={() => setMobileOpen(false)} className="rounded-md px-3 py-3 text-sm font-semibold text-[#F26722] hover:bg-[#F1F5F9]">Lazer</Link>
-                ))}
                 <button
                   onClick={() => { setMobileOpen(false); openLead(); }}
                   className="mt-2 rounded-lg bg-[#F26722] px-5 py-3 text-sm font-semibold text-white"
