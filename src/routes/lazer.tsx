@@ -153,7 +153,15 @@ function Hero({ openLead }: { openLead: (u?: string, t?: string) => void }) {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden pt-[100px] md:pt-[76px]">
       <div className="absolute inset-0">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2000&q=80" alt="" className="h-full w-full object-cover" />
+        <video
+          src="https://res.cloudinary.com/dkwpz87nw/video/upload/v1782926486/202607011336_xnjn4j.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2000&q=80"
+          className="h-full w-full object-cover"
+        />
         <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(10,30,63,0.7), rgba(6,24,56,0.4))" }} />
       </div>
       <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 h-full w-full" />
