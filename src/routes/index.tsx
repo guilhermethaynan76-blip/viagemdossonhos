@@ -140,6 +140,7 @@ function HomePage() {
         <WhyUsSection />
         <ManagementSection openLead={openLead} />
         <ProcessSection />
+        <LazerTeaserSection />
         <QuizSection openLead={openLead} />
         <TestimonialsSection openLead={openLead} />
         <FinalCTA openLead={openLead} />
