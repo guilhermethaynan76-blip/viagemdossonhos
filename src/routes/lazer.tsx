@@ -63,7 +63,7 @@ function LazerPage() {
         <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 md:px-8">
           <a href="#top" className="flex items-center gap-3">
             <img src={LOGO} alt="Viagens dos Sonhos" className="h-[52px] w-auto object-contain" />
-            <span className="hidden text-lg italic text-[#F26722] md:inline" style={playfair}>Viagens dos Sonhos</span>
+            <span className="text-base italic text-[#F26722] md:text-lg" style={playfair}>Viagens dos Sonhos</span>
           </a>
           <div className="hidden items-center gap-7 lg:flex">
             <a href="#destinos" className="text-sm text-white/90 hover:text-white">Destinos</a>
