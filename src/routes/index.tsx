@@ -387,7 +387,7 @@ function ServicesSection() {
   ];
 
   return (
-    <section id="servicos" className="bg-[#FAFCFF] py-20 md:py-28">
+    <section id="servicos" className="bg-[#F1F5F9] py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-label text-[10px] font-semibold text-[#F26722]">O que fazemos</p>
