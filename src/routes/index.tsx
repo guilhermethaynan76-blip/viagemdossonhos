@@ -1044,6 +1044,13 @@ function Footer() {
               <a href="#" className="block hover:text-[#F26722]">Compliance</a>
             </div>
           </div>
+          <div>
+            <p className="font-label text-[10px] font-semibold text-[#F26722]">Navegação</p>
+            <div className="mt-4 space-y-2 text-sm">
+              <Link to="/" className="block hover:text-[#F26722]">Viagens Corporativas</Link>
+              <Link to="/lazer" className="block hover:text-[#F26722]">Viagens de Lazer</Link>
+            </div>
+          </div>
         </div>
         <div className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-[#64748B]">
           © 2026 Viagens dos Sonhos. Todos os direitos reservados.
@@ -1052,3 +1059,61 @@ function Footer() {
     </footer>
   );
 }
+
+function LazerTeaserSection() {
+  const navigate = Route.useNavigate ? null : null;
+  return (
+    <section className="relative overflow-hidden py-24" style={{ background: "linear-gradient(180deg,#E6F1FA,#FAFCFF)" }}>
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 md:grid-cols-2 md:px-8">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="overflow-hidden rounded-2xl shadow-[0_25px_60px_-20px_rgba(14,134,212,0.35)] transition-transform hover:-translate-y-1"
+          style={{ aspectRatio: "4/3" }}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80"
+            alt="Destino paradisíaco"
+            className="h-full w-full object-cover"
+          />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <p className="font-label text-xs font-semibold text-[#F26722]">TAMBÉM PARA LAZER</p>
+          <h2 className="mt-3 text-4xl font-bold leading-tight text-[#0A2540] md:text-5xl">
+            Viagens de lazer que realizam sonhos
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-[#64748B]">
+            Além da gestão corporativa, também cuidamos das suas viagens de lazer. Pacotes, cruzeiros, destinos nacionais e internacionais para você viajar com quem entende do assunto.
+          </p>
+          <ul className="mt-6 space-y-3">
+            {[
+              "Passagens nacionais e internacionais",
+              "Pacotes e cruzeiros",
+              "Hospedagem e locação de veículos",
+              "Atendimento personalizado",
+            ].map((item) => (
+              <li key={item} className="flex items-center gap-3 text-sm text-[#0A2540]">
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-[#F26722]" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <Link
+            to="/lazer"
+            className="mt-8 inline-flex items-center gap-2 rounded-lg bg-[#F26722] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#F58B4E]"
+          >
+            Conhecer nossos destinos <ArrowRight className="h-4 w-4" />
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
