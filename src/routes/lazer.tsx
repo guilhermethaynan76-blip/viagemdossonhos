@@ -368,7 +368,7 @@ function HowItWorks() {
 /* GALLERY */
 function Gallery() {
   const imgs = [
-    "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80",
+    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80",
     "https://images.unsplash.com/photo-1500835556837-99ac94a94552?w=800&q=80",
     "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=800&q=80",
     "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80",
