@@ -532,7 +532,9 @@ function Testimonials({ openLead }: { openLead: (u?: string, t?: string) => void
   }, [paused, items.length]);
 
   return (
-    <section className="bg-[#FAFCFF] py-28">
+    <section className="relative overflow-hidden bg-[#F0E9DA] py-28">
+      <div aria-hidden className="pointer-events-none absolute -top-32 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-[#0E86D4] opacity-[0.05] blur-3xl" />
+      <svg aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-24 w-full" xmlns="http://www.w3.org/2000/svg"><line x1="10%" y1="50%" x2="90%" y2="50%" stroke="#0A2540" strokeOpacity="0.08" /></svg>
       <div className="mx-auto max-w-4xl px-4 md:px-8">
         <div className="text-center">
           <p className="font-label text-xs font-semibold text-[#F26722]">EXPERIÊNCIAS</p>
