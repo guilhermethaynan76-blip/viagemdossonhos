@@ -717,7 +717,7 @@ function QuizSection({ openLead }: { openLead: (url?: string, title?: string) =>
   })();
 
   return (
-    <section className="bg-[#FAFCFF] py-20 md:py-28">
+    <section className="bg-[#E6F1FA] py-20 md:py-28">
       <div className="mx-auto max-w-3xl px-4 md:px-8">
         <div className="text-center">
           <p className="font-label text-[10px] font-semibold text-[#F26722]">Diagnóstico</p>
