@@ -292,7 +292,7 @@ function Destinations({ openLead }: { openLead: (u?: string, t?: string) => void
     { name: "Paris", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&q=80" },
     { name: "Cancún", img: "https://images.unsplash.com/photo-1552074284-5e88ef1aef18?w=1200&q=80" },
     { name: "Dubai", img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80" },
-    { name: "Nordeste Brasileiro", img: "https://images.unsplash.com/photo-1621789098261-9d3f0edccdba?w=1200&q=80" },
+    { name: "Nordeste Brasileiro", img: "https://images.unsplash.com/photo-1544550581-5f7ceaf7f992?w=1200&q=80" },
     { name: "Europa", img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200&q=80" },
   ];
   return (
