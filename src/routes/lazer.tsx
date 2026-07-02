@@ -225,7 +225,10 @@ function TrustBar() {
 /* STORYTELLING */
 function Storytelling() {
   return (
-    <section className="bg-[#FAFCFF] py-28 text-[#0A2540]">
+    <section className="relative overflow-hidden bg-[#F0E9DA] py-28 text-[#0A2540]">
+      <div aria-hidden className="pointer-events-none absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-[#0E86D4] opacity-[0.07] blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-32 h-[480px] w-[480px] rounded-full bg-[#F26722] opacity-[0.05] blur-3xl" />
+      <svg aria-hidden className="pointer-events-none absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="60%" x2="100%" y2="60%" stroke="#0E86D4" strokeOpacity="0.08" strokeDasharray="6 10" /></svg>
       <div className="mx-auto max-w-5xl px-4 text-center md:px-8">
         <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ ...playfair, fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: 1.15 }}>
           Não vendemos viagens. <em className="text-[#F26722]">Realizamos sonhos.</em>
