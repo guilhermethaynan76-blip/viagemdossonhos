@@ -235,7 +235,7 @@ function Storytelling() {
         </p>
         <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
           <img src="https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=1200&q=80" alt="Família feliz viajando junta" className="h-80 w-full rounded-2xl object-cover shadow-lg" />
-          <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=1200&q=80" alt="Família curtindo viagem" className="h-80 w-full rounded-2xl object-cover shadow-lg" />
+          <img src="https://images.unsplash.com/photo-1541417904950-b491f435605c?w=1200&q=80" alt="Família curtindo viagem" className="h-80 w-full rounded-2xl object-cover shadow-lg" />
         </div>
       </div>
     </section>
