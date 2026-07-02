@@ -177,9 +177,20 @@ function HeroSection({ openLead }: { openLead: (url?: string, title?: string) =>
     <section
       ref={ref}
       className="relative overflow-hidden pt-[88px]"
-      style={{ background: "linear-gradient(180deg, #FAFCFF 0%, #E6F3FC 100%)" }}
+      style={{ background: "linear-gradient(180deg, #E6F1FA 0%, #F1F5F9 100%)" }}
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 py-16 md:px-8 lg:grid-cols-[55%_45%] lg:gap-8 lg:py-24">
+      {/* Decorative blobs */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-40 -top-32 h-[520px] w-[520px] rounded-full blur-3xl"
+        style={{ background: "rgba(14,134,212,0.08)" }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-40 -left-40 h-[480px] w-[480px] rounded-full blur-3xl"
+        style={{ background: "rgba(242,103,34,0.05)" }}
+      />
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 py-16 md:px-8 lg:grid-cols-[55%_45%] lg:gap-8 lg:py-24">
         {/* Left column */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
