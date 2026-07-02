@@ -377,12 +377,8 @@ function Gallery() {
     "https://images.unsplash.com/photo-1500835556837-99ac94a94552?w=800&q=80",
     "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=800&q=80",
     "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80",
-    "https://images.unsplash.com/photo-1504198266287-1659872e6590?w=800&q=80",
-    "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
-    "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80",
-    "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80",
   ];
-  const sizes = ["md:col-span-2 md:row-span-2", "", "", "md:col-span-2", "", "md:row-span-2", "", ""];
+  const sizes = ["md:col-span-2 md:row-span-2", "", "", "md:col-span-2"];
   return (
     <section className="bg-[#F4EEE2] py-28">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
