@@ -344,7 +344,9 @@ function HowItWorks() {
     { n: "03", t: "Boa viagem", d: "Você viaja tranquilo enquanto cuidamos de cada detalhe" },
   ];
   return (
-    <section id="como" className="bg-[#FAFCFF] py-28">
+    <section id="como" className="relative overflow-hidden bg-[#F7EFE0] py-28">
+      <div aria-hidden className="pointer-events-none absolute -right-40 top-10 h-[420px] w-[420px] rounded-full bg-[#F26722] opacity-[0.06] blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute -left-32 bottom-0 h-[380px] w-[380px] rounded-full bg-[#0E86D4] opacity-[0.06] blur-3xl" />
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="text-center">
           <h2 className="text-[#0A2540]" style={{ ...playfair, fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
