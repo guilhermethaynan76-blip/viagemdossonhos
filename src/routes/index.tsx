@@ -177,9 +177,20 @@ function HeroSection({ openLead }: { openLead: (url?: string, title?: string) =>
     <section
       ref={ref}
       className="relative overflow-hidden pt-[88px]"
-      style={{ background: "linear-gradient(180deg, #FAFCFF 0%, #E6F3FC 100%)" }}
+      style={{ background: "linear-gradient(180deg, #E6F1FA 0%, #F1F5F9 100%)" }}
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 py-16 md:px-8 lg:grid-cols-[55%_45%] lg:gap-8 lg:py-24">
+      {/* Decorative blobs */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-40 -top-32 h-[520px] w-[520px] rounded-full blur-3xl"
+        style={{ background: "rgba(14,134,212,0.08)" }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-40 -left-40 h-[480px] w-[480px] rounded-full blur-3xl"
+        style={{ background: "rgba(242,103,34,0.05)" }}
+      />
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 py-16 md:px-8 lg:grid-cols-[55%_45%] lg:gap-8 lg:py-24">
         {/* Left column */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -376,7 +387,7 @@ function ServicesSection() {
   ];
 
   return (
-    <section id="servicos" className="bg-[#FAFCFF] py-20 md:py-28">
+    <section id="servicos" className="bg-[#F1F5F9] py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-label text-[10px] font-semibold text-[#F26722]">O que fazemos</p>
@@ -468,7 +479,7 @@ function ManagementSection({ openLead }: { openLead: (url?: string, title?: stri
   const big = useCounter(30, 1800, inView);
 
   return (
-    <section id="gestao" ref={ref} className="bg-[#FAFCFF] py-20 md:py-28">
+    <section id="gestao" ref={ref} className="bg-[#E6F1FA] py-20 md:py-28">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-4 md:px-8 lg:grid-cols-2">
         <div>
           <span className="rounded-full border border-[#0E86D4]/30 bg-[#0E86D4]/10 px-4 py-1.5 font-label text-[10px] font-semibold text-[#0E86D4]">
@@ -706,7 +717,7 @@ function QuizSection({ openLead }: { openLead: (url?: string, title?: string) =>
   })();
 
   return (
-    <section className="bg-[#FAFCFF] py-20 md:py-28">
+    <section className="bg-[#E6F1FA] py-20 md:py-28">
       <div className="mx-auto max-w-3xl px-4 md:px-8">
         <div className="text-center">
           <p className="font-label text-[10px] font-semibold text-[#F26722]">Diagnóstico</p>
@@ -819,7 +830,7 @@ function TestimonialsSection({ openLead }: { openLead: (url?: string, title?: st
 
   const t = TESTIMONIALS[i];
   return (
-    <section className="bg-[#FAFCFF] py-20 md:py-28">
+    <section className="bg-[#F1F5F9] py-20 md:py-28">
       <div className="mx-auto max-w-4xl px-4 md:px-8">
         <div className="text-center">
           <p className="font-label text-[10px] font-semibold text-[#F26722]">Cases de sucesso</p>
