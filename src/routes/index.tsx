@@ -1061,7 +1061,7 @@ function Footer() {
 }
 
 function LazerTeaserSection() {
-  const navigate = Route.useNavigate ? null : null;
+  
   return (
     <section className="relative overflow-hidden py-24" style={{ background: "linear-gradient(180deg,#E6F1FA,#FAFCFF)" }}>
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 md:grid-cols-2 md:px-8">
