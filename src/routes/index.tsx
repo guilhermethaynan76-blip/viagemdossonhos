@@ -830,7 +830,7 @@ function TestimonialsSection({ openLead }: { openLead: (url?: string, title?: st
 
   const t = TESTIMONIALS[i];
   return (
-    <section className="bg-[#FAFCFF] py-20 md:py-28">
+    <section className="bg-[#F1F5F9] py-20 md:py-28">
       <div className="mx-auto max-w-4xl px-4 md:px-8">
         <div className="text-center">
           <p className="font-label text-[10px] font-semibold text-[#F26722]">Cases de sucesso</p>
