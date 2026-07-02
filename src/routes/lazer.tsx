@@ -59,7 +59,7 @@ function LazerPage() {
       <motion.div style={{ scaleX }} className="fixed left-0 right-0 top-0 z-[100] h-[3px] origin-left bg-[#F26722]" />
 
       {/* NAVBAR */}
-      <nav className={`fixed left-0 right-0 top-0 z-50 h-[76px] transition-all ${scrolled ? "bg-[#F26722]/95 backdrop-blur-xl border-b border-white/10" : "bg-[#F26722] border-b border-white/10"}`}>
+      <nav className={`fixed left-0 right-0 top-0 z-50 h-[76px] transition-all ${scrolled ? "bg-[#0A2540]/95 backdrop-blur-xl border-b border-white/10" : "bg-[#0A2540] border-b border-white/10"}`}>
         <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 md:px-8">
           <a href="#top" className="flex items-center gap-3">
             <img src={LOGO} alt="Viagens dos Sonhos" className="h-[52px] w-auto object-contain" />
