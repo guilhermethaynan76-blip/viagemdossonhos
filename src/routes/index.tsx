@@ -479,7 +479,7 @@ function ManagementSection({ openLead }: { openLead: (url?: string, title?: stri
   const big = useCounter(30, 1800, inView);
 
   return (
-    <section id="gestao" ref={ref} className="bg-[#FAFCFF] py-20 md:py-28">
+    <section id="gestao" ref={ref} className="bg-[#E6F1FA] py-20 md:py-28">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-4 md:px-8 lg:grid-cols-2">
         <div>
           <span className="rounded-full border border-[#0E86D4]/30 bg-[#0E86D4]/10 px-4 py-1.5 font-label text-[10px] font-semibold text-[#0E86D4]">
