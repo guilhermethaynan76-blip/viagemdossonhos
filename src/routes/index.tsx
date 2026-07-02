@@ -89,6 +89,7 @@ function HomePage() {
             <a href="#diferenciais" className="text-sm font-medium text-white/90 hover:text-white">Diferenciais</a>
             <a href="#gestao" className="text-sm font-medium text-white/90 hover:text-white">Gestão</a>
             <a href="#contato" className="text-sm font-medium text-white/90 hover:text-white">Contato</a>
+            <Link to="/lazer" className="text-sm font-medium text-[#F26722] hover:text-[#F58B4E]">Lazer</Link>
           </div>
 
           <div className="flex items-center gap-3">
