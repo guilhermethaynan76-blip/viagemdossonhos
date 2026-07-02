@@ -158,15 +158,6 @@ function Hero({ openLead }: { openLead: (u?: string, t?: string) => void }) {
       </div>
       <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 h-full w-full" />
 
-      {/* Plane crossing */}
-      <motion.div
-        initial={{ x: "-10%", y: "20%" }}
-        animate={{ x: "110%", y: "10%" }}
-        transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-        className="pointer-events-none absolute z-10"
-      >
-        <Plane className="h-10 w-10 -rotate-12 text-[#F26722]" strokeWidth={1.5} />
-      </motion.div>
 
       <div className="relative z-20 mx-auto w-full max-w-7xl px-4 md:px-8">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-3xl text-center md:text-left">
