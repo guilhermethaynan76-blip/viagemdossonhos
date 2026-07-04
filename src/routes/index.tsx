@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const WHATSAPP_BASE = "https://wa.me/5511932195053";
+const WHATSAPP_BASE = "https://wa.me/5511991335192";
 const WA_DEFAULT = `${WHATSAPP_BASE}?text=Olá,+gostaria+de+uma+cotação+de+viagens+corporativas.`;
 
 function WhatsAppIcon({ className = "h-5 w-5" }: { className?: string }) {
@@ -1027,8 +1027,8 @@ function Footer() {
           <div>
             <p className="font-label text-[10px] font-semibold text-[#F26722]">Contato</p>
             <div className="mt-4 space-y-3 text-sm">
-              <a href="https://wa.me/5511932195053" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#F26722]">
-                <WhatsAppIcon className="h-4 w-4" /> (11) 93219-5053
+              <a href="https://wa.me/5511991335192" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#F26722]">
+                <WhatsAppIcon className="h-4 w-4" /> (11) 99133-5192
               </a>
               <a href="#" className="flex items-center gap-2 hover:text-[#F26722]">
                 <Instagram className="h-4 w-4" /> Instagram

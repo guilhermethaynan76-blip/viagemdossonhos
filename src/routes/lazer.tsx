@@ -18,7 +18,7 @@ export const Route = createFileRoute("/lazer")({
   component: LazerPage,
 });
 
-const WA_BASE = "https://wa.me/5511932195053";
+const WA_BASE = "https://wa.me/5511991335192";
 const WA_LAZER = `${WA_BASE}?text=Olá,+gostaria+de+uma+cotação+de+viagem+de+lazer.`;
 const LOGO = "https://res.cloudinary.com/dkwpz87nw/image/upload/v1782936767/WhatsApp_Image_2026-07-01_at_17.08.32-removebg-preview_bjdwhz.png";
 
@@ -651,7 +651,7 @@ function Footer() {
           <div>
             <p className="font-label text-[10px] font-semibold text-[#F26722]">Contato</p>
             <div className="mt-4 space-y-3 text-sm">
-              <a href="https://wa.me/5511932195053" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#F26722]"><WhatsAppIcon className="h-4 w-4" /> (11) 93219-5053</a>
+              <a href="https://wa.me/5511991335192" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#F26722]"><WhatsAppIcon className="h-4 w-4" /> (11) 99133-5192</a>
               <a href="https://instagram.com/agenciaviagensdossonhos" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#F26722]"><Instagram className="h-4 w-4" /> @agenciaviagensdossonhos</a>
               <p className="text-[#94A3B8]">Atendimento em todo o Brasil</p>
             </div>
