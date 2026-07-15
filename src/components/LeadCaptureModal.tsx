@@ -19,6 +19,9 @@ export function LeadCaptureModal({ open, onClose, whatsappUrl, title }: LeadCapt
     const finalUrl = whatsappUrl.includes("text=")
       ? whatsappUrl.replace("text=", `text=Olá,+sou+${encodeURIComponent(name.trim())}.+`)
       : `${whatsappUrl}${sep}text=${encodeURIComponent(`Olá, sou ${name.trim()}. Gostaria de uma cotação corporativa.`)}`;
+    if (typeof window !== "undefined" && typeof (window as any).gtag_report_conversion === "function") {
+      (window as any).gtag_report_conversion(finalUrl);
+    }
     window.open(finalUrl, "_blank");
     setName("");
     onClose();
