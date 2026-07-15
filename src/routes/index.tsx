@@ -1027,7 +1027,7 @@ function Footer() {
           <div>
             <p className="font-label text-[10px] font-semibold text-[#F26722]">Contato</p>
             <div className="mt-4 space-y-3 text-sm">
-              <a href="https://wa.me/5511991335192" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#F26722]">
+              <a href="https://wa.me/5511991335192" target="_blank" rel="noreferrer" onClick={(e) => { const w = window as any; if (typeof w.gtag_report_conversion === "function") { w.gtag_report_conversion(); } }} className="flex items-center gap-2 hover:text-[#F26722]">
                 <WhatsAppIcon className="h-4 w-4" /> (11) 99133-5192
               </a>
               <a href="#" className="flex items-center gap-2 hover:text-[#F26722]">
