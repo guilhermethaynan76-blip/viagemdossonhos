@@ -104,18 +104,18 @@ function LazerPage() {
       </nav>
 
       <main id="top">
-        <Hero openLead={openLead} />
+        <Hero openLead={openLead} trackConversion={trackConversion} />
         <TrustBar />
         <Storytelling />
         <Services />
-        <Destinations openLead={openLead} />
+        <Destinations openLead={openLead} trackConversion={trackConversion} />
         <HowItWorks />
         <Gallery />
-        <Quiz openLead={openLead} />
-        <Testimonials openLead={openLead} />
-        <FinalCTA openLead={openLead} />
+        <Quiz openLead={openLead} trackConversion={trackConversion} />
+        <Testimonials openLead={openLead} trackConversion={trackConversion} />
+        <FinalCTA openLead={openLead} trackConversion={trackConversion} />
         <FAQ />
-        <Footer />
+        <Footer trackConversion={trackConversion} />
       </main>
 
       <button onClick={() => { trackConversion(); openLead(); }} aria-label="WhatsApp" className="fixed bottom-6 right-6 z-[90] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl" style={{ animation: "pulse-ring 2s infinite" }}>
@@ -128,7 +128,7 @@ function LazerPage() {
 }
 
 /* HERO */
-function Hero({ openLead }: { openLead: (u?: string, t?: string) => void }) {
+function Hero({ openLead, trackConversion }: { openLead: (u?: string, t?: string) => void; trackConversion: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -296,7 +296,7 @@ function Services() {
 }
 
 /* DESTINATIONS */
-function Destinations({ openLead }: { openLead: (u?: string, t?: string) => void }) {
+function Destinations({ openLead, trackConversion }: { openLead: (u?: string, t?: string) => void; trackConversion: () => void }) {
   const dests = [
     { name: "Maldivas", img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&q=80" },
     { name: "Paris", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&q=80" },
@@ -449,7 +449,7 @@ function renderItalic(s: string) {
   const parts = s.split(/\*(.+?)\*/g);
   return parts.map((p, i) => i % 2 === 1 ? <em key={i} className="text-[#F26722]">{p}</em> : <span key={i}>{p}</span>);
 }
-function Quiz({ openLead }: { openLead: (u?: string, t?: string) => void }) {
+function Quiz({ openLead, trackConversion }: { openLead: (u?: string, t?: string) => void; trackConversion: () => void }) {
   const [step, setStep] = useState(0);
   const [scores, setScores] = useState<Record<Cat, number>>({ praia: 0, cultura: 0, aventura: 0, luxo: 0 });
   const [done, setDone] = useState<Cat | null>(null);
@@ -519,7 +519,7 @@ function Quiz({ openLead }: { openLead: (u?: string, t?: string) => void }) {
 }
 
 /* TESTIMONIALS */
-function Testimonials({ openLead }: { openLead: (u?: string, t?: string) => void }) {
+function Testimonials({ openLead, trackConversion }: { openLead: (u?: string, t?: string) => void; trackConversion: () => void }) {
   const items = [
     { t: "A Viagem dos Sonhos cuidou de absolutamente tudo na nossa lua de mel nas Maldivas. Foi impecável, do voo ao hotel. Recomendo de olhos fechados!", n: "Ana e Pedro", r: "Lua de mel, Maldivas" },
     { t: "Precisava organizar uma viagem em família para o Nordeste e foi tudo perfeito. Roteiro incrível, hotel excelente e um atendimento super atencioso. Recomendo demais!", n: "Ricardo M.", r: "Viagem em família" },
@@ -581,7 +581,7 @@ function Testimonials({ openLead }: { openLead: (u?: string, t?: string) => void
 }
 
 /* FINAL CTA */
-function FinalCTA({ openLead }: { openLead: (u?: string, t?: string) => void }) {
+function FinalCTA({ openLead, trackConversion }: { openLead: (u?: string, t?: string) => void; trackConversion: () => void }) {
   return (
     <section id="contato" className="relative overflow-hidden bg-[#0A2540] py-32">
       <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=2000&q=80" alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
@@ -643,7 +643,7 @@ function FAQ() {
 }
 
 /* FOOTER */
-function Footer() {
+function Footer({ trackConversion }: { trackConversion: () => void }) {
   return (
     <footer className="bg-[#061838] py-16 text-[#CBD5E1]">
       <div className="mx-auto max-w-7xl px-4 md:px-8">

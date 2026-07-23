@@ -145,18 +145,18 @@ function HomePage() {
       </nav>
 
       <main id="top">
-        <HeroSection openLead={openLead} />
+        <HeroSection openLead={openLead} trackConversion={trackConversion} />
         
         <ServicesSection />
         <WhyUsSection />
-        <ManagementSection openLead={openLead} />
+        <ManagementSection openLead={openLead} trackConversion={trackConversion} />
         <ProcessSection />
         <LazerTeaserSection />
-        <QuizSection openLead={openLead} />
-        <TestimonialsSection openLead={openLead} />
-        <FinalCTA openLead={openLead} />
+        <QuizSection openLead={openLead} trackConversion={trackConversion} />
+        <TestimonialsSection openLead={openLead} trackConversion={trackConversion} />
+        <FinalCTA openLead={openLead} trackConversion={trackConversion} />
         <FAQSection />
-        <Footer />
+        <Footer trackConversion={trackConversion} />
       </main>
 
       {/* Floating WhatsApp */}
@@ -180,7 +180,7 @@ function HomePage() {
 }
 
 /* ---------------- HERO ---------------- */
-function HeroSection({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+function HeroSection({ openLead, trackConversion }: { openLead: (url?: string, title?: string) => void; trackConversion: () => void }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const c1 = useCounter(30, 1500, inView);
@@ -487,7 +487,7 @@ function WhyUsSection() {
 }
 
 /* ---------------- MANAGEMENT ---------------- */
-function ManagementSection({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+function ManagementSection({ openLead, trackConversion }: { openLead: (url?: string, title?: string) => void; trackConversion: () => void }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const big = useCounter(30, 1800, inView);
@@ -689,7 +689,7 @@ const QUIZ: QuizQuestion[] = [
   ]},
 ];
 
-function QuizSection({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+function QuizSection({ openLead, trackConversion }: { openLead: (url?: string, title?: string) => void; trackConversion: () => void }) {
   const [step, setStep] = useState(0);
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
@@ -832,7 +832,7 @@ const TESTIMONIALS = [
   { q: "Atendimento consultivo de verdade. Não são só vendedores de passagens, são parceiros que entendem o negócio e propõem soluções que economizam tempo e dinheiro.", n: "Patrícia Souza", r: "Head de Compras, Multinacional" },
 ];
 
-function TestimonialsSection({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+function TestimonialsSection({ openLead, trackConversion }: { openLead: (url?: string, title?: string) => void; trackConversion: () => void }) {
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -919,7 +919,7 @@ function TestimonialsSection({ openLead }: { openLead: (url?: string, title?: st
 }
 
 /* ---------------- FINAL CTA ---------------- */
-function FinalCTA({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+function FinalCTA({ openLead, trackConversion }: { openLead: (url?: string, title?: string) => void; trackConversion: () => void }) {
   return (
     <section
       id="contato"
@@ -1016,7 +1016,7 @@ function FAQSection() {
 }
 
 /* ---------------- FOOTER ---------------- */
-function Footer() {
+function Footer({ trackConversion }: { trackConversion: () => void }) {
   return (
     <footer className="bg-[#061838] py-16 text-[#CBD5E1]">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
