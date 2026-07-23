@@ -80,6 +80,15 @@ function LazerPage() {
             <Link to="/" className="text-sm text-[#F26722] hover:text-[#F58B4E]">Corporativo</Link>
           </div>
           <div className="flex items-center gap-3">
+            <a
+              href="https://www.instagram.com/agenciaviagensdossonhos"
+              target="_blank"
+              rel="noreferrer"
+              className="mr-2 text-white/80 transition-colors hover:text-[#F26722]"
+              aria-label="Instagram"
+            >
+              <Instagram size={20} />
+            </a>
             <button onClick={() => { trackConversion(); openLead(); }} className="hidden rounded-full bg-[#F26722] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E] md:inline-flex">
               Solicitar Cotação
             </button>
@@ -659,7 +668,7 @@ function Footer({ trackConversion }: { trackConversion: () => void }) {
             <p className="font-label text-[10px] font-semibold text-[#F26722]">Contato</p>
             <div className="mt-4 space-y-3 text-sm">
               <a href="https://wa.me/5511991335192" target="_blank" rel="noreferrer" onClick={() => { trackConversion(); const w = window as any; if (typeof w.gtag_report_conversion === "function") { w.gtag_report_conversion(); } }} className="flex items-center gap-2 hover:text-[#F26722]"><WhatsAppIcon className="h-4 w-4" /> (11) 99133-5192</a>
-              <a href="https://instagram.com/agenciaviagensdossonhos" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#F26722]"><Instagram className="h-4 w-4" /> @agenciaviagensdossonhos</a>
+              <a href="https://www.instagram.com/agenciaviagensdossonhos" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#F26722]"><Instagram className="h-4 w-4" /> @agenciaviagensdossonhos</a>
               <p className="text-[#94A3B8]">Atendimento em todo o Brasil</p>
             </div>
           </div>

@@ -104,6 +104,15 @@ function HomePage() {
           </div>
 
           <div className="flex items-center gap-3">
+            <a
+              href="https://www.instagram.com/agenciaviagensdossonhos"
+              target="_blank"
+              rel="noreferrer"
+              className="mr-2 text-white/80 transition-colors hover:text-[#F26722]"
+              aria-label="Instagram"
+            >
+              <Instagram size={20} />
+            </a>
             <button
               onClick={() => { trackConversion(); openLead(); }}
               className="hidden rounded-lg bg-[#F26722] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E] md:inline-flex"
@@ -112,7 +121,7 @@ function HomePage() {
             </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="rounded-md p-2 text-[#0A2540] lg:hidden"
+              className="rounded-md p-2 text-white lg:hidden"
               aria-label="Menu"
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -1041,8 +1050,8 @@ function Footer({ trackConversion }: { trackConversion: () => void }) {
               <a href="https://wa.me/5511991335192" target="_blank" rel="noreferrer" onClick={(e) => { trackConversion(); const w = window as any; if (typeof w.gtag_report_conversion === "function") { w.gtag_report_conversion(); } }} className="flex items-center gap-2 hover:text-[#F26722]">
                 <WhatsAppIcon className="h-4 w-4" /> (11) 99133-5192
               </a>
-              <a href="#" className="flex items-center gap-2 hover:text-[#F26722]">
-                <Instagram className="h-4 w-4" /> Instagram
+              <a href="https://www.instagram.com/agenciaviagensdossonhos" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#F26722]">
+                <Instagram className="h-4 w-4" /> @agenciaviagensdossonhos
               </a>
               <p className="text-[#94A3B8]">Atendimento em todo o Brasil</p>
             </div>
