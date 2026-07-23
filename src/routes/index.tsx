@@ -105,7 +105,7 @@ function HomePage() {
 
           <div className="flex items-center gap-3">
             <button
-              onClick={() => openLead()}
+              onClick={() => { trackConversion(); openLead(); }}
               className="hidden rounded-lg bg-[#F26722] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E] md:inline-flex"
             >
               Solicitar Cotação
@@ -133,7 +133,7 @@ function HomePage() {
                 ))}
                 <Link to="/lazer" onClick={() => setMobileOpen(false)} className="rounded-md px-3 py-3 text-sm font-semibold text-[#F26722] hover:bg-[#F1F5F9]">Lazer</Link>
                 <button
-                  onClick={() => { setMobileOpen(false); openLead(); }}
+                  onClick={() => { trackConversion(); setMobileOpen(false); openLead(); }}
                   className="mt-2 rounded-lg bg-[#F26722] px-5 py-3 text-sm font-semibold text-white"
                 >
                   Solicitar Cotação
@@ -161,7 +161,7 @@ function HomePage() {
 
       {/* Floating WhatsApp */}
       <button
-        onClick={() => openLead()}
+        onClick={() => { trackConversion(); openLead(); }}
         aria-label="WhatsApp"
         className="fixed bottom-6 right-6 z-[90] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl"
         style={{ animation: "pulse-ring 2s infinite" }}
@@ -237,13 +237,13 @@ function HeroSection({ openLead }: { openLead: (url?: string, title?: string) =>
 
           <div className="mt-2 flex w-full flex-col gap-3 sm:flex-row">
             <button
-              onClick={() => openLead()}
+              onClick={() => { trackConversion(); openLead(); }}
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#F26722] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E]"
             >
               Solicitar Cotação <ArrowRight className="h-4 w-4" />
             </button>
             <button
-              onClick={() => openLead(WA_DEFAULT, "Falar com Consultor")}
+              onClick={() => { trackConversion(); openLead(WA_DEFAULT, "Falar com Consultor"); }}
               className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[#0E86D4] bg-transparent px-6 py-3.5 text-sm font-semibold text-[#0E86D4] transition hover:bg-[#0E86D4]/5"
             >
               Falar com Consultor
@@ -527,7 +527,7 @@ function ManagementSection({ openLead }: { openLead: (url?: string, title?: stri
           </div>
 
           <button
-            onClick={() => openLead()}
+            onClick={() => { trackConversion(); openLead(); }}
             className="mt-8 inline-flex items-center gap-2 rounded-lg bg-[#F26722] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E]"
           >
             Quero economizar <ArrowRight className="h-4 w-4" />
@@ -804,7 +804,7 @@ function QuizSection({ openLead }: { openLead: (url?: string, title?: string) =>
                 </h3>
                 <p className="mx-auto mt-4 max-w-lg text-[#64748B]">{result.text}</p>
                 <button
-                  onClick={() => openLead(result.url, result.cta)}
+                  onClick={() => { trackConversion(); openLead(result.url, result.cta); }}
                   className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#F26722] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#F58B4E]"
                 >
                   <WhatsAppIcon className="h-4 w-4" /> {result.cta}
@@ -907,7 +907,7 @@ function TestimonialsSection({ openLead }: { openLead: (url?: string, title?: st
 
         <div className="mt-10 text-center">
           <button
-            onClick={() => openLead(`${WHATSAPP_BASE}?text=${encodeURIComponent("Vi os depoimentos e quero uma cotação de viagens corporativas.")}`)}
+            onClick={() => { trackConversion(); openLead(`${WHATSAPP_BASE}?text=${encodeURIComponent("Vi os depoimentos e quero uma cotação de viagens corporativas.")}`); }}
             className="inline-flex items-center gap-2 rounded-lg bg-[#F26722] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E]"
           >
             Quero esse resultado na minha empresa <ArrowRight className="h-4 w-4" />
@@ -946,7 +946,7 @@ function FinalCTA({ openLead }: { openLead: (url?: string, title?: string) => vo
           ))}
         </div>
         <button
-          onClick={() => openLead()}
+          onClick={() => { trackConversion(); openLead(); }}
           className="mt-10 inline-flex items-center gap-2 rounded-lg bg-[#F26722] px-8 py-4 text-base font-semibold text-white shadow-xl shadow-[#F26722]/30 transition hover:bg-[#F58B4E]"
         >
           <WhatsAppIcon className="h-5 w-5" /> Falar com um Consultor Agora
@@ -1038,7 +1038,7 @@ function Footer() {
           <div>
             <p className="font-label text-[10px] font-semibold text-[#F26722]">Contato</p>
             <div className="mt-4 space-y-3 text-sm">
-              <a href="https://wa.me/5511991335192" target="_blank" rel="noreferrer" onClick={(e) => { const w = window as any; if (typeof w.gtag_report_conversion === "function") { w.gtag_report_conversion(); } }} className="flex items-center gap-2 hover:text-[#F26722]">
+              <a href="https://wa.me/5511991335192" target="_blank" rel="noreferrer" onClick={(e) => { trackConversion(); const w = window as any; if (typeof w.gtag_report_conversion === "function") { w.gtag_report_conversion(); } }} className="flex items-center gap-2 hover:text-[#F26722]">
                 <WhatsAppIcon className="h-4 w-4" /> (11) 99133-5192
               </a>
               <a href="#" className="flex items-center gap-2 hover:text-[#F26722]">
