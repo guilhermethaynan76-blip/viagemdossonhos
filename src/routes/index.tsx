@@ -56,10 +56,21 @@ function HomePage() {
   }, []);
 
   function openLead(url: string = WA_DEFAULT, title?: string) {
+    // Track conversion event for Google Ads if this is a direct WhatsApp call (though usually it opens modal)
+    // But since the request says "EVERY button", and some might bypass the modal in future or are direct links,
+    // we'll handle the conversion inside the elements that call this or in the modal submit.
+    // For direct clicks that lead to WhatsApp, we add the event.
     setModalUrl(url);
     setModalTitle(title);
     setModalOpen(true);
   }
+
+  const trackConversion = () => {
+    const w = window as any;
+    if (typeof w.gtag === "function") {
+      w.gtag('event', 'conversion', { 'send_to': 'AW-18314023988/Ud0yCOqq4tAcELSo55xE' });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#FAFCFF]">
@@ -94,7 +105,7 @@ function HomePage() {
 
           <div className="flex items-center gap-3">
             <button
-              onClick={() => openLead()}
+              onClick={() => { trackConversion(); openLead(); }}
               className="hidden rounded-lg bg-[#F26722] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E] md:inline-flex"
             >
               Solicitar Cotação
@@ -122,7 +133,7 @@ function HomePage() {
                 ))}
                 <Link to="/lazer" onClick={() => setMobileOpen(false)} className="rounded-md px-3 py-3 text-sm font-semibold text-[#F26722] hover:bg-[#F1F5F9]">Lazer</Link>
                 <button
-                  onClick={() => { setMobileOpen(false); openLead(); }}
+                  onClick={() => { trackConversion(); setMobileOpen(false); openLead(); }}
                   className="mt-2 rounded-lg bg-[#F26722] px-5 py-3 text-sm font-semibold text-white"
                 >
                   Solicitar Cotação
@@ -134,23 +145,23 @@ function HomePage() {
       </nav>
 
       <main id="top">
-        <HeroSection openLead={openLead} />
+        <HeroSection openLead={openLead} trackConversion={trackConversion} />
         
         <ServicesSection />
         <WhyUsSection />
-        <ManagementSection openLead={openLead} />
+        <ManagementSection openLead={openLead} trackConversion={trackConversion} />
         <ProcessSection />
         <LazerTeaserSection />
-        <QuizSection openLead={openLead} />
-        <TestimonialsSection openLead={openLead} />
-        <FinalCTA openLead={openLead} />
+        <QuizSection openLead={openLead} trackConversion={trackConversion} />
+        <TestimonialsSection openLead={openLead} trackConversion={trackConversion} />
+        <FinalCTA openLead={openLead} trackConversion={trackConversion} />
         <FAQSection />
-        <Footer />
+        <Footer trackConversion={trackConversion} />
       </main>
 
       {/* Floating WhatsApp */}
       <button
-        onClick={() => openLead()}
+        onClick={() => { trackConversion(); openLead(); }}
         aria-label="WhatsApp"
         className="fixed bottom-6 right-6 z-[90] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl"
         style={{ animation: "pulse-ring 2s infinite" }}
@@ -169,7 +180,7 @@ function HomePage() {
 }
 
 /* ---------------- HERO ---------------- */
-function HeroSection({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+function HeroSection({ openLead, trackConversion }: { openLead: (url?: string, title?: string) => void; trackConversion: () => void }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const c1 = useCounter(30, 1500, inView);
@@ -226,13 +237,13 @@ function HeroSection({ openLead }: { openLead: (url?: string, title?: string) =>
 
           <div className="mt-2 flex w-full flex-col gap-3 sm:flex-row">
             <button
-              onClick={() => openLead()}
+              onClick={() => { trackConversion(); openLead(); }}
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#F26722] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E]"
             >
               Solicitar Cotação <ArrowRight className="h-4 w-4" />
             </button>
             <button
-              onClick={() => openLead(WA_DEFAULT, "Falar com Consultor")}
+              onClick={() => { trackConversion(); openLead(WA_DEFAULT, "Falar com Consultor"); }}
               className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[#0E86D4] bg-transparent px-6 py-3.5 text-sm font-semibold text-[#0E86D4] transition hover:bg-[#0E86D4]/5"
             >
               Falar com Consultor
@@ -476,7 +487,7 @@ function WhyUsSection() {
 }
 
 /* ---------------- MANAGEMENT ---------------- */
-function ManagementSection({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+function ManagementSection({ openLead, trackConversion }: { openLead: (url?: string, title?: string) => void; trackConversion: () => void }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const big = useCounter(30, 1800, inView);
@@ -516,7 +527,7 @@ function ManagementSection({ openLead }: { openLead: (url?: string, title?: stri
           </div>
 
           <button
-            onClick={() => openLead()}
+            onClick={() => { trackConversion(); openLead(); }}
             className="mt-8 inline-flex items-center gap-2 rounded-lg bg-[#F26722] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E]"
           >
             Quero economizar <ArrowRight className="h-4 w-4" />
@@ -678,7 +689,7 @@ const QUIZ: QuizQuestion[] = [
   ]},
 ];
 
-function QuizSection({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+function QuizSection({ openLead, trackConversion }: { openLead: (url?: string, title?: string) => void; trackConversion: () => void }) {
   const [step, setStep] = useState(0);
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
@@ -793,7 +804,7 @@ function QuizSection({ openLead }: { openLead: (url?: string, title?: string) =>
                 </h3>
                 <p className="mx-auto mt-4 max-w-lg text-[#64748B]">{result.text}</p>
                 <button
-                  onClick={() => openLead(result.url, result.cta)}
+                  onClick={() => { trackConversion(); openLead(result.url, result.cta); }}
                   className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#F26722] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#F58B4E]"
                 >
                   <WhatsAppIcon className="h-4 w-4" /> {result.cta}
@@ -821,7 +832,7 @@ const TESTIMONIALS = [
   { q: "Atendimento consultivo de verdade. Não são só vendedores de passagens, são parceiros que entendem o negócio e propõem soluções que economizam tempo e dinheiro.", n: "Patrícia Souza", r: "Head de Compras, Multinacional" },
 ];
 
-function TestimonialsSection({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+function TestimonialsSection({ openLead, trackConversion }: { openLead: (url?: string, title?: string) => void; trackConversion: () => void }) {
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -896,7 +907,7 @@ function TestimonialsSection({ openLead }: { openLead: (url?: string, title?: st
 
         <div className="mt-10 text-center">
           <button
-            onClick={() => openLead(`${WHATSAPP_BASE}?text=${encodeURIComponent("Vi os depoimentos e quero uma cotação de viagens corporativas.")}`)}
+            onClick={() => { trackConversion(); openLead(`${WHATSAPP_BASE}?text=${encodeURIComponent("Vi os depoimentos e quero uma cotação de viagens corporativas.")}`); }}
             className="inline-flex items-center gap-2 rounded-lg bg-[#F26722] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E]"
           >
             Quero esse resultado na minha empresa <ArrowRight className="h-4 w-4" />
@@ -908,7 +919,7 @@ function TestimonialsSection({ openLead }: { openLead: (url?: string, title?: st
 }
 
 /* ---------------- FINAL CTA ---------------- */
-function FinalCTA({ openLead }: { openLead: (url?: string, title?: string) => void }) {
+function FinalCTA({ openLead, trackConversion }: { openLead: (url?: string, title?: string) => void; trackConversion: () => void }) {
   return (
     <section
       id="contato"
@@ -935,7 +946,7 @@ function FinalCTA({ openLead }: { openLead: (url?: string, title?: string) => vo
           ))}
         </div>
         <button
-          onClick={() => openLead()}
+          onClick={() => { trackConversion(); openLead(); }}
           className="mt-10 inline-flex items-center gap-2 rounded-lg bg-[#F26722] px-8 py-4 text-base font-semibold text-white shadow-xl shadow-[#F26722]/30 transition hover:bg-[#F58B4E]"
         >
           <WhatsAppIcon className="h-5 w-5" /> Falar com um Consultor Agora
@@ -1005,7 +1016,7 @@ function FAQSection() {
 }
 
 /* ---------------- FOOTER ---------------- */
-function Footer() {
+function Footer({ trackConversion }: { trackConversion: () => void }) {
   return (
     <footer className="bg-[#061838] py-16 text-[#CBD5E1]">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
@@ -1027,7 +1038,7 @@ function Footer() {
           <div>
             <p className="font-label text-[10px] font-semibold text-[#F26722]">Contato</p>
             <div className="mt-4 space-y-3 text-sm">
-              <a href="https://wa.me/5511991335192" target="_blank" rel="noreferrer" onClick={(e) => { const w = window as any; if (typeof w.gtag_report_conversion === "function") { w.gtag_report_conversion(); } }} className="flex items-center gap-2 hover:text-[#F26722]">
+              <a href="https://wa.me/5511991335192" target="_blank" rel="noreferrer" onClick={(e) => { trackConversion(); const w = window as any; if (typeof w.gtag_report_conversion === "function") { w.gtag_report_conversion(); } }} className="flex items-center gap-2 hover:text-[#F26722]">
                 <WhatsAppIcon className="h-4 w-4" /> (11) 99133-5192
               </a>
               <a href="#" className="flex items-center gap-2 hover:text-[#F26722]">

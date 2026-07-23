@@ -54,6 +54,13 @@ function LazerPage() {
     setModalOpen(true);
   }
 
+  const trackConversion = () => {
+    const w = window as any;
+    if (typeof w.gtag === "function") {
+      w.gtag('event', 'conversion', { 'send_to': 'AW-18314023988/Ud0yCOqq4tAcELSo55xE' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0A2540] text-[#FAFCFF]">
       <motion.div style={{ scaleX }} className="fixed left-0 right-0 top-0 z-[100] h-[3px] origin-left bg-[#F26722]" />
@@ -73,7 +80,7 @@ function LazerPage() {
             <Link to="/" className="text-sm text-[#F26722] hover:text-[#F58B4E]">Corporativo</Link>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={() => openLead()} className="hidden rounded-full bg-[#F26722] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E] md:inline-flex">
+            <button onClick={() => { trackConversion(); openLead(); }} className="hidden rounded-full bg-[#F26722] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#F58B4E] md:inline-flex">
               Solicitar Cotação
             </button>
             <button onClick={() => setMobileOpen(!mobileOpen)} className="rounded-md p-2 text-white lg:hidden" aria-label="Menu">
@@ -89,7 +96,7 @@ function LazerPage() {
                   <a key={h} href={h} onClick={() => setMobileOpen(false)} className="rounded-md px-3 py-3 text-sm text-white hover:bg-white/10">{l}</a>
                 ))}
                 <Link to="/" onClick={() => setMobileOpen(false)} className="rounded-md px-3 py-3 text-sm font-semibold text-[#F26722] hover:bg-white/10">Corporativo</Link>
-                <button onClick={() => { setMobileOpen(false); openLead(); }} className="mt-2 rounded-full bg-[#F26722] px-5 py-3 text-sm font-semibold text-white">Solicitar Cotação</button>
+                <button onClick={() => { trackConversion(); setMobileOpen(false); openLead(); }} className="mt-2 rounded-full bg-[#F26722] px-5 py-3 text-sm font-semibold text-white">Solicitar Cotação</button>
               </div>
             </motion.div>
           )}
@@ -97,21 +104,21 @@ function LazerPage() {
       </nav>
 
       <main id="top">
-        <Hero openLead={openLead} />
+        <Hero openLead={openLead} trackConversion={trackConversion} />
         <TrustBar />
         <Storytelling />
         <Services />
-        <Destinations openLead={openLead} />
+        <Destinations openLead={openLead} trackConversion={trackConversion} />
         <HowItWorks />
         <Gallery />
-        <Quiz openLead={openLead} />
-        <Testimonials openLead={openLead} />
-        <FinalCTA openLead={openLead} />
+        <Quiz openLead={openLead} trackConversion={trackConversion} />
+        <Testimonials openLead={openLead} trackConversion={trackConversion} />
+        <FinalCTA openLead={openLead} trackConversion={trackConversion} />
         <FAQ />
-        <Footer />
+        <Footer trackConversion={trackConversion} />
       </main>
 
-      <button onClick={() => openLead()} aria-label="WhatsApp" className="fixed bottom-6 right-6 z-[90] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl" style={{ animation: "pulse-ring 2s infinite" }}>
+      <button onClick={() => { trackConversion(); openLead(); }} aria-label="WhatsApp" className="fixed bottom-6 right-6 z-[90] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl" style={{ animation: "pulse-ring 2s infinite" }}>
         <WhatsAppIcon className="h-7 w-7" />
       </button>
 
@@ -121,7 +128,7 @@ function LazerPage() {
 }
 
 /* HERO */
-function Hero({ openLead }: { openLead: (u?: string, t?: string) => void }) {
+function Hero({ openLead, trackConversion }: { openLead: (u?: string, t?: string) => void; trackConversion: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -179,7 +186,7 @@ function Hero({ openLead }: { openLead: (u?: string, t?: string) => void }) {
             Passagens, pacotes, cruzeiros e experiências inesquecíveis. Viaje com quem entende do assunto e realiza sonhos.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center md:justify-start">
-            <button onClick={() => openLead()} className="rounded-full bg-[#F26722] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#F58B4E]">
+             <button onClick={() => { trackConversion(); openLead(); }} className="rounded-full bg-[#F26722] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#F58B4E]">
               Solicitar Cotação
             </button>
             <a href="#destinos" className="rounded-full border border-white/70 px-8 py-4 text-sm font-semibold text-white transition hover:bg-white/10">
@@ -289,7 +296,7 @@ function Services() {
 }
 
 /* DESTINATIONS */
-function Destinations({ openLead }: { openLead: (u?: string, t?: string) => void }) {
+function Destinations({ openLead, trackConversion }: { openLead: (u?: string, t?: string) => void; trackConversion: () => void }) {
   const dests = [
     { name: "Maldivas", img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&q=80" },
     { name: "Paris", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&q=80" },
@@ -322,7 +329,7 @@ function Destinations({ openLead }: { openLead: (u?: string, t?: string) => void
               <div className="absolute inset-x-0 bottom-0 p-6">
                 <h3 className="text-2xl text-white" style={playfair}>{d.name}</h3>
                 <button
-                  onClick={() => openLead(`${WA_BASE}?text=Quero+conhecer+${encodeURIComponent(d.name)}!`, `Cotação para ${d.name}`)}
+                  onClick={() => { trackConversion(); openLead(`${WA_BASE}?text=Quero+conhecer+${encodeURIComponent(d.name)}!`, `Cotação para ${d.name}`); }}
                   className="mt-4 w-full rounded-full bg-[#F26722] px-5 py-2.5 text-xs font-semibold text-white opacity-0 transition-all group-hover:opacity-100"
                 >
                   Quero ir para cá
@@ -442,7 +449,7 @@ function renderItalic(s: string) {
   const parts = s.split(/\*(.+?)\*/g);
   return parts.map((p, i) => i % 2 === 1 ? <em key={i} className="text-[#F26722]">{p}</em> : <span key={i}>{p}</span>);
 }
-function Quiz({ openLead }: { openLead: (u?: string, t?: string) => void }) {
+function Quiz({ openLead, trackConversion }: { openLead: (u?: string, t?: string) => void; trackConversion: () => void }) {
   const [step, setStep] = useState(0);
   const [scores, setScores] = useState<Record<Cat, number>>({ praia: 0, cultura: 0, aventura: 0, luxo: 0 });
   const [done, setDone] = useState<Cat | null>(null);
@@ -497,7 +504,7 @@ function Quiz({ openLead }: { openLead: (u?: string, t?: string) => void }) {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
               <h3 className="text-3xl text-white" style={playfair}>{renderItalic(RESULTS[done].title)}</h3>
               <p className="mt-4 text-white/85">{RESULTS[done].text}</p>
-              <button onClick={() => openLead(RESULTS[done].wa, "Sua viagem dos sonhos")} className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#F26722] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#F58B4E]">
+              <button onClick={() => { trackConversion(); openLead(RESULTS[done].wa, "Sua viagem dos sonhos"); }} className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#F26722] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#F58B4E]">
                 <WhatsAppIcon className="h-5 w-5" /> Quero Essa Viagem
               </button>
               <button onClick={reset} className="mt-3 w-full rounded-full border border-white/30 px-6 py-3 text-sm text-white hover:bg-white/10">
@@ -512,7 +519,7 @@ function Quiz({ openLead }: { openLead: (u?: string, t?: string) => void }) {
 }
 
 /* TESTIMONIALS */
-function Testimonials({ openLead }: { openLead: (u?: string, t?: string) => void }) {
+function Testimonials({ openLead, trackConversion }: { openLead: (u?: string, t?: string) => void; trackConversion: () => void }) {
   const items = [
     { t: "A Viagem dos Sonhos cuidou de absolutamente tudo na nossa lua de mel nas Maldivas. Foi impecável, do voo ao hotel. Recomendo de olhos fechados!", n: "Ana e Pedro", r: "Lua de mel, Maldivas" },
     { t: "Precisava organizar uma viagem em família para o Nordeste e foi tudo perfeito. Roteiro incrível, hotel excelente e um atendimento super atencioso. Recomendo demais!", n: "Ricardo M.", r: "Viagem em família" },
@@ -564,7 +571,7 @@ function Testimonials({ openLead }: { openLead: (u?: string, t?: string) => void
           </div>
         </div>
         <div className="mt-10 text-center">
-          <button onClick={() => openLead(`${WA_BASE}?text=Vi+os+depoimentos+e+quero+uma+cotação+de+viagem.`)} className="rounded-full bg-[#F26722] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#F58B4E]">
+          <button onClick={() => { trackConversion(); openLead(`${WA_BASE}?text=Vi+os+depoimentos+e+quero+uma+cotação+de+viagem.`); }} className="rounded-full bg-[#F26722] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#F58B4E]">
             Quero realizar meu sonho
           </button>
         </div>
@@ -574,7 +581,7 @@ function Testimonials({ openLead }: { openLead: (u?: string, t?: string) => void
 }
 
 /* FINAL CTA */
-function FinalCTA({ openLead }: { openLead: (u?: string, t?: string) => void }) {
+function FinalCTA({ openLead, trackConversion }: { openLead: (u?: string, t?: string) => void; trackConversion: () => void }) {
   return (
     <section id="contato" className="relative overflow-hidden bg-[#0A2540] py-32">
       <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=2000&q=80" alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
@@ -584,7 +591,7 @@ function FinalCTA({ openLead }: { openLead: (u?: string, t?: string) => void }) 
           Sua viagem dos sonhos <em className="text-[#F26722]">começa aqui</em>
         </h2>
         <p className="mt-5 text-lg text-[#F26722]">Solicite sua cotação agora, sem compromisso.</p>
-        <button onClick={() => openLead()} className="mt-10 rounded-full bg-[#F26722] px-10 py-5 text-base font-semibold text-white transition hover:bg-[#F58B4E]">
+        <button onClick={() => { trackConversion(); openLead(); }} className="mt-10 rounded-full bg-[#F26722] px-10 py-5 text-base font-semibold text-white transition hover:bg-[#F58B4E]">
           Solicitar Minha Cotação
         </button>
       </div>
@@ -636,7 +643,7 @@ function FAQ() {
 }
 
 /* FOOTER */
-function Footer() {
+function Footer({ trackConversion }: { trackConversion: () => void }) {
   return (
     <footer className="bg-[#061838] py-16 text-[#CBD5E1]">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
@@ -651,7 +658,7 @@ function Footer() {
           <div>
             <p className="font-label text-[10px] font-semibold text-[#F26722]">Contato</p>
             <div className="mt-4 space-y-3 text-sm">
-              <a href="https://wa.me/5511991335192" target="_blank" rel="noreferrer" onClick={() => { const w = window as any; if (typeof w.gtag_report_conversion === "function") { w.gtag_report_conversion(); } }} className="flex items-center gap-2 hover:text-[#F26722]"><WhatsAppIcon className="h-4 w-4" /> (11) 99133-5192</a>
+              <a href="https://wa.me/5511991335192" target="_blank" rel="noreferrer" onClick={() => { trackConversion(); const w = window as any; if (typeof w.gtag_report_conversion === "function") { w.gtag_report_conversion(); } }} className="flex items-center gap-2 hover:text-[#F26722]"><WhatsAppIcon className="h-4 w-4" /> (11) 99133-5192</a>
               <a href="https://instagram.com/agenciaviagensdossonhos" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-[#F26722]"><Instagram className="h-4 w-4" /> @agenciaviagensdossonhos</a>
               <p className="text-[#94A3B8]">Atendimento em todo o Brasil</p>
             </div>
