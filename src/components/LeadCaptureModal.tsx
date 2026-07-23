@@ -15,13 +15,22 @@ export function LeadCaptureModal({ open, onClose, whatsappUrl, title }: LeadCapt
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!name.trim()) return;
+
+    // Track conversion event for Google Ads
+    const w = window as any;
+    if (typeof w.gtag === "function") {
+      w.gtag('event', 'conversion', { 'send_to': 'AW-18314023988/Ud0yCOqq4tAcELSo55xE' });
+    }
+
     const sep = whatsappUrl.includes("?") ? "&" : "?";
     const finalUrl = whatsappUrl.includes("text=")
       ? whatsappUrl.replace("text=", `text=Olá,+sou+${encodeURIComponent(name.trim())}.+`)
       : `${whatsappUrl}${sep}text=${encodeURIComponent(`Olá, sou ${name.trim()}. Gostaria de uma cotação corporativa.`)}`;
-    if (typeof window !== "undefined" && typeof (window as any).gtag_report_conversion === "function") {
-      (window as any).gtag_report_conversion(finalUrl);
+
+    if (typeof w.gtag_report_conversion === "function") {
+      w.gtag_report_conversion(finalUrl);
     }
+
     window.open(finalUrl, "_blank");
     setName("");
     onClose();

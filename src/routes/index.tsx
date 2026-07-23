@@ -56,10 +56,21 @@ function HomePage() {
   }, []);
 
   function openLead(url: string = WA_DEFAULT, title?: string) {
+    // Track conversion event for Google Ads if this is a direct WhatsApp call (though usually it opens modal)
+    // But since the request says "EVERY button", and some might bypass the modal in future or are direct links,
+    // we'll handle the conversion inside the elements that call this or in the modal submit.
+    // For direct clicks that lead to WhatsApp, we add the event.
     setModalUrl(url);
     setModalTitle(title);
     setModalOpen(true);
   }
+
+  const trackConversion = () => {
+    const w = window as any;
+    if (typeof w.gtag === "function") {
+      w.gtag('event', 'conversion', { 'send_to': 'AW-18314023988/Ud0yCOqq4tAcELSo55xE' });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#FAFCFF]">

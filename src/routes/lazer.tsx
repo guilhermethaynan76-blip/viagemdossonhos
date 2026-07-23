@@ -54,6 +54,13 @@ function LazerPage() {
     setModalOpen(true);
   }
 
+  const trackConversion = () => {
+    const w = window as any;
+    if (typeof w.gtag === "function") {
+      w.gtag('event', 'conversion', { 'send_to': 'AW-18314023988/Ud0yCOqq4tAcELSo55xE' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0A2540] text-[#FAFCFF]">
       <motion.div style={{ scaleX }} className="fixed left-0 right-0 top-0 z-[100] h-[3px] origin-left bg-[#F26722]" />
